@@ -1,0 +1,23 @@
+.ui-token-group {
+  $radius: 0.125rem;
+
+  @include ui-mx-1;
+
+  & .ui-token:nth-child(1) {
+    @include ui-rounded-left($radius);
+
+    background-color: $gray-300;
+  }
+
+  & .ui-token:nth-child(2) {
+    @include ui-mx-1;
+
+    background-color: $gray-300;
+  }
+
+  & .ui-token:nth-child(3) {
+    @include ui-rounded-right($radius);
+
+    background-color: $gray-400;
+  }
+}

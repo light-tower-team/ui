@@ -1,0 +1,16 @@
+.ui-breadcrumbs {
+  margin-left: -0.5rem;
+
+  &__collapse-btn,
+  &__collapse-item,
+  &__collapse-btn-icon,
+  &__separator,
+  &__link {
+    @include ui-font-color($gray-400);
+  }
+
+  &__collapse-btn,
+  &__collapse-btn-icon {
+    @include ui-size(1.5rem);
+  }
+}

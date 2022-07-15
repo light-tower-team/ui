@@ -1,0 +1,9 @@
+.ui-menu-item {
+  &__start-icon {
+    @include ui-mr-8;
+  }
+
+  &__end-icon {
+    @include ui-ml-8;
+  }
+}

@@ -1,0 +1,25 @@
+.ui-token {
+  @include ui-flex;
+  @include ui-flex-center;
+
+  @include ui-px-3;
+  @include ui-py-1;
+
+  background-color: $gray-300;
+
+  &:focus {
+    background-color: $gray-200;
+  }
+
+  &__text {
+    @include ui-font(0.875rem, 400, $gray-650);
+  }
+
+  &__close-btn {
+    @include ui-size(0.5rem);
+    @include ui-ml-4;
+    @include ui-cursor-pointer;
+
+    fill: $gray-650;
+  }
+}

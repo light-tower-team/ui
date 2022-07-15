@@ -1,0 +1,32 @@
+.ui-badge {
+  &.MuiChip-root {
+    @include ui-flex-fixed;
+    @include ui-max-w(fit-content);
+
+    @include ui-font(0.8125rem, 500, $green-400);
+  }
+
+  &.MuiChip-sizeSmall {
+    @include ui-px-7;
+    @include ui-py-1;
+  }
+
+  &.MuiChip-sizeMedium {
+    @include ui-px-9;
+    @include ui-py-4;
+  }
+
+  &.MuiChip-outlined {
+    @include ui-border(1px, solid, $green-400);
+  }
+
+  &.MuiChip-filled {
+    @include ui-bg-color($green-50);
+    @include ui-border-none;
+  }
+
+  & > .MuiChip-label {
+    @include ui-p-0;
+    @include ui-pt(2px);
+  }
+}
