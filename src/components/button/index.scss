@@ -1,5 +1,5 @@
 .ui-button {
-  max-width: fit-content;
+  width: fit-content;
   @include ui-font(1px, solid, $transparent);
 
   &.MuiButton-containedNeutral {
@@ -131,6 +131,13 @@
   & > .MuiButton-startIcon > .MuiCircularProgress-root {
     width: 1rem !important;
     height: 1rem !important;
+  }
+
+  & > .MuiButton-endIcon > .MuiChip-root {
+    @include ui-px-2;
+  }
+  & > .MuiButton-startIcon > .MuiChip-root {
+    @include ui-px-2;
   }
 
   &.Mui-disabled > .ui-typography.MuiTypography-button {

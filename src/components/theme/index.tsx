@@ -17,7 +17,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   return (
     <MUIThemeProvider theme={theme}>
       <ThemeContext.Provider value={ctx}>
-        <Stack id={ctx.APP_ROOT_DIR} className="ui-pos-rel">
+        <Stack
+          id={ctx.APP_ROOT_DIR}
+          className="ui-pos-rel ui-w-full ui-h-screen"
+        >
           {children}
         </Stack>
         <Stack id={ctx.PORTAL_ROOT_DIR}></Stack>

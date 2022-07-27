@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import MUIGrid, { GridProps as MUIGridProps } from "@mui/material/Grid";
 
-export type GridProps = MUIGridProps;
+export interface GridProps extends MUIGridProps {}
 
 export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  ({ children = null, ...props }, ref: React.Ref<HTMLDivElement>) => {
+  ({ children, ...props }, ref: React.Ref<HTMLDivElement>) => {
     return (
       <MUIGrid ref={ref} {...props}>
         {children}

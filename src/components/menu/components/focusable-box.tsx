@@ -8,7 +8,7 @@ export interface FocusableBoxProps extends React.HTMLAttributes<HTMLElement> {
 
 export const FocusableBox: React.FC<FocusableBoxProps> = ({
   children,
-  focus = false,
+  focus,
   defaultInFocus = true,
   ...props
 }) => {
