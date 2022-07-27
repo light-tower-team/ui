@@ -1,0 +1,59 @@
+@mixin ui-avatar__color--neutral {
+  @include ui-bg-color($gray-100);
+
+  & > .MuiTypography-root {
+    @include ui-font-color($gray-400);
+  }
+}
+
+@mixin ui-avatar__color--primary {
+  @include ui-bg-color($green-100);
+
+  & > .MuiTypography-root {
+    @include ui-font-color($green-400);
+  }
+}
+
+@mixin ui-avatar__size--xs {
+  @include ui-size(1.125rem);
+
+  & > .MuiTypography-root {
+    @include ui-font-size(0.75rem);
+  }
+}
+
+@mixin ui-avatar__size--sm {
+  @include ui-size(1.5rem);
+
+  & > .MuiTypography-root {
+    @include ui-font-size(0.75rem);
+  }
+}
+
+@mixin ui-avatar__size--md {
+  @include ui-size(2rem);
+
+  & > .MuiTypography-root {
+    @include ui-font-size(0.875rem);
+  }
+}
+
+@mixin ui-avatar__size--lg {
+  @include ui-size(3rem);
+
+  & > .MuiTypography-root {
+    @include ui-font-size(1.375rem);
+  }
+}
+
+@mixin ui-avatar__size--xl {
+  @include ui-size(4rem);
+
+  & > .MuiTypography-root {
+    @include ui-font-size(1.5rem);
+  }
+}
+
+@mixin ui-avatar--rounded {
+  @include ui-rounded;
+}

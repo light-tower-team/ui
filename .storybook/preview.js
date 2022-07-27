@@ -1,4 +1,5 @@
-import "../src/scss/storybook.scss";
+import "../src/scss/storybook.global.scss";
+import ThemeProvider from "../src/components/theme";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,3 +10,11 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider>
+      <Story />
+    </ThemeProvider>
+  ),
+];

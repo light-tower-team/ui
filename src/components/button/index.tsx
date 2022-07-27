@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import MUIButton, { ButtonProps as MUIButtonProps } from "@mui/material/Button";
 import Typography from "../typography";
 import Loading from "../loading";
+import "./index.scss";
 
 export type VariantButton = "text" | "outlined" | "contained";
 

@@ -1,12 +1,21 @@
 import React from "react";
-import MUICircularProgress, {
-  CircularProgressProps as MUICircularProgressProps,
-} from "@mui/material/CircularProgress";
+import MUICircularProgress from "@mui/material/CircularProgress";
+import "./index.scss";
 
-export type LoadingProps = MUICircularProgressProps;
+export interface LoadingProps {
+  color: "neutral" | "primary";
+}
 
-export const Loading: React.FC<LoadingProps> = (props) => {
-  return <MUICircularProgress {...props}></MUICircularProgress>;
+export const Loading: React.FC<LoadingProps> = ({
+  color = "neutral",
+  ...props
+}) => {
+  return (
+    <MUICircularProgress
+      {...props}
+      className={["ui-loading", `ui-loading__color--${color}`].join(" ")}
+    />
+  );
 };
 
 export default Loading;

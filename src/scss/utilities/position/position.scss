@@ -1,0 +1,19 @@
+@mixin ui-pos-none {
+  position: none;
+}
+
+@mixin ui-pos-rel {
+  position: relative;
+}
+
+@mixin ui-pos-fixed {
+  position: fixed;
+}
+
+@mixin ui-pos-sticky {
+  position: sticky;
+}
+
+@mixin ui-pos-abs {
+  position: absolute;
+}

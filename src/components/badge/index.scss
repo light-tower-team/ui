@@ -1,19 +1,36 @@
+@import "../avatar/ui";
+
 .ui-badge {
   &.MuiChip-root {
     @include ui-flex-fixed;
+    @include ui-w(fit-content);
     @include ui-max-w(fit-content);
 
-    @include ui-font(0.8125rem, 500, $green-400);
+    & > .MuiChip-label {
+      @include ui-font(0.8125rem, 500, $green-400);
+    }
+
+    & > .MuiChip-icon {
+      @include ui-font-color($green-400);
+      @include ui-fill($green-400);
+    }
+
+    & > .MuiAvatar-root {
+      @include ui-avatar__color--primary;
+      @include ui-avatar--rounded;
+    }
   }
 
   &.MuiChip-sizeSmall {
-    @include ui-px-7;
-    @include ui-py-1;
+    & > .MuiAvatar-root {
+      @include ui-avatar__size--xs;
+    }
   }
 
   &.MuiChip-sizeMedium {
-    @include ui-px-9;
-    @include ui-py-4;
+    & > .MuiAvatar-root {
+      @include ui-avatar__size--sm;
+    }
   }
 
   &.MuiChip-outlined {
@@ -23,10 +40,5 @@
   &.MuiChip-filled {
     @include ui-bg-color($green-50);
     @include ui-border-none;
-  }
-
-  & > .MuiChip-label {
-    @include ui-p-0;
-    @include ui-pt(2px);
   }
 }

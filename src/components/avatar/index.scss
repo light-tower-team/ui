@@ -1,0 +1,39 @@
+@import "ui";
+
+.ui-avatar.MuiAvatar-root {
+  &.ui-avatar--rounded {
+    @include ui-avatar--rounded;
+  }
+
+  &.ui-avatar__color {
+    &--neutral {
+      @include ui-avatar__color--neutral;
+    }
+
+    &--primary {
+      @include ui-avatar__color--primary;
+    }
+  }
+
+  &.ui-avatar__size {
+    &--xs {
+      @include ui-avatar__size--xs;
+    }
+
+    &--sm {
+      @include ui-avatar__size--sm;
+    }
+
+    &--md {
+      @include ui-avatar__size--md;
+    }
+
+    &--lg {
+      @include ui-avatar__size--lg;
+    }
+
+    &--xl {
+      @include ui-avatar__size--xl;
+    }
+  }
+}

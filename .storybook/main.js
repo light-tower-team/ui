@@ -27,6 +27,7 @@ module.exports = {
           loader: "sass-loader",
           options: {
             sourceMap: true,
+            additionalData: `@import "./src/scss/storybook.scss";`,
           },
         },
       ],
@@ -48,6 +49,7 @@ module.exports = {
           loader: "sass-loader",
           options: {
             sourceMap: true,
+            additionalData: `@import "./src/scss/storybook.scss";`,
           },
         },
       ],

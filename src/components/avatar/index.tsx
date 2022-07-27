@@ -2,18 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import MUIAvatar, { AvatarProps as MUIAvatarProps } from "@mui/material/Avatar";
 import Typography from "../typography";
+import "./index.scss";
 
 export interface AvatarProps extends MUIAvatarProps {
   name: string;
   src?: string;
   alt?: string;
-  size?: number;
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  rounded?: boolean;
+  color?: "neutral" | "primary" | "secondary";
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
   name,
-  alt = "user avatar",
-  size = 16,
+  alt = "The user avatar",
+  size = "medium",
+  color = "neutral",
+  className,
+  rounded,
   ...props
 }) => {
   const firstNameLetter = () => {
@@ -22,12 +28,18 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <MUIAvatar
+      {...props}
       alt={alt}
       variant="rounded"
-      sx={{ width: size, height: size, fontSize: `${size / 40}rem` }}
-      {...props}
+      className={[
+        "ui-avatar",
+        `ui-avatar__size--${size}`,
+        `ui-avatar__color--${color}`,
+        rounded && "ui-avatar--rounded",
+        className,
+      ].join(" ")}
     >
-      <Typography variant="inherit">{firstNameLetter()}</Typography>
+      <Typography>{firstNameLetter()}</Typography>
     </MUIAvatar>
   );
 };
@@ -35,7 +47,8 @@ export const Avatar: React.FC<AvatarProps> = ({
 Avatar.propTypes = {
   name: PropTypes.string.isRequired,
   src: PropTypes.string,
-  size: PropTypes.oneOf([16, 20, 24, 32, 40, 44, 48, 120]),
+  size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
+  color: PropTypes.oneOf(["neutral", "primary", "secondary"]),
 };
 
 export default Avatar;

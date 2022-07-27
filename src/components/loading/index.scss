@@ -1,3 +1,13 @@
-.MuiCircularProgress-root {
-  color: $gray-500 !important;
+@import "ui";
+
+.ui-loading {
+  &__color {
+    &--neutral {
+      @include ui-loading__color--neutral;
+    }
+
+    &--primary {
+      @include ui-loading__color--primary;
+    }
+  }
 }
