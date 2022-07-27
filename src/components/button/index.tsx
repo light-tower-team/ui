@@ -5,24 +5,22 @@ import Typography from "../typography";
 import Loading from "../loading";
 import "./index.scss";
 
-export type VariantButton = "text" | "outlined" | "contained";
-
 export interface ButtonProps extends MUIButtonProps {
-  children?: string;
+  color?: "neutral" | "primary"; // for correct display in the storybook
   loading?: boolean;
+  rounded?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      children = null,
-      variant = "contained",
-      startIcon = null,
-      endIcon = null,
-      loading = false,
-      className = "",
-      size = "medium",
-      disabled = false,
+      children,
+      startIcon,
+      endIcon,
+      loading,
+      className,
+      disabled,
+      rounded,
       ...props
     },
     ref: React.Ref<HTMLButtonElement>
@@ -32,13 +30,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <MUIButton
         ref={ref}
-        size={size}
-        variant={variant}
         startIcon={loading ? <Loading /> : startIcon}
         endIcon={isIconBtn ? null : endIcon}
         className={[
           "ui-button",
           loading ? "ui-button--loading" : "",
+          rounded ? "ui-button--rounded" : "",
           isIconBtn ? "ui-button__icon" : "",
           className,
         ].join(" ")}
@@ -56,13 +53,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 Button.propTypes = {
   children: PropTypes.string,
-  loading: PropTypes.bool,
+  className: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  variant: PropTypes.oneOf(["text", "contained", "outlined"]),
+  color: PropTypes.oneOf(["neutral", "primary"]),
   startIcon: PropTypes.element,
   endIcon: PropTypes.element,
-  variant: PropTypes.oneOf(["text", "contained", "outlined"]),
+  loading: PropTypes.bool,
   disabled: PropTypes.bool,
-  className: PropTypes.string,
+  rounded: PropTypes.bool,
 };
 
 export default Button;

@@ -40,7 +40,7 @@
   }
 
   &.MuiTypography-button {
-    @include ui-font(0.875rem, 400, $white);
+    @include ui-font(0.875rem, 500, $white);
     @include ui-text-transform-none;
   }
 }

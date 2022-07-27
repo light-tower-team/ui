@@ -3,7 +3,7 @@ import MUICircularProgress from "@mui/material/CircularProgress";
 import "./index.scss";
 
 export interface LoadingProps {
-  color: "neutral" | "primary";
+  color?: "neutral" | "primary"; // for correct display in the storybook
 }
 
 export const Loading: React.FC<LoadingProps> = ({
@@ -11,10 +11,7 @@ export const Loading: React.FC<LoadingProps> = ({
   ...props
 }) => {
   return (
-    <MUICircularProgress
-      {...props}
-      className={["ui-loading", `ui-loading__color--${color}`].join(" ")}
-    />
+    <MUICircularProgress {...props} color={color} className="ui-loading" />
   );
 };
 

@@ -1,13 +1,13 @@
-@import "ui";
-
 .ui-loading {
-  &__color {
-    &--neutral {
-      @include ui-loading__color--neutral;
+  &.MuiCircularProgress-colorNeutral {
+    &.MuiCircularProgress-root {
+      @include ui-font-color($gray-400);
     }
+  }
 
-    &--primary {
-      @include ui-loading__color--primary;
+  &.MuiCircularProgress-colorPrimary {
+    &.MuiCircularProgress-root {
+      @include ui-font-color($green-400);
     }
   }
 }

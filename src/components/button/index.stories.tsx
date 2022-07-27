@@ -8,12 +8,6 @@ import Badge from "../badge";
 export default {
   title: "Base/Button",
   component: Button,
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["small", "medium", "large"],
-    },
-  },
 } as ComponentMeta<typeof Button>;
 
 export const DefaultButton: ComponentStory<typeof Button> = (args) => (

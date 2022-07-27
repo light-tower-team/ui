@@ -12,6 +12,15 @@ module.exports = {
     builder: "@storybook/builder-webpack5",
   },
   webpackFinal: async (config) => {
+    config.module.rules = config.module.rules.map((rule) =>
+      rule.test.test(".svg") ? { ...rule, exclude: /assets.+\.svg$/ } : rule
+    );
+
+    config.module.rules.unshift({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
     config.module.rules.push({
       test: /\.module.s(a|c)ss$/,
       use: [

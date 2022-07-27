@@ -1,0 +1,10 @@
+.ui-app-bar {
+  &.MuiAppBar-root {
+    @include ui-border-bottom(1px, solid, $border-color);
+  }
+
+  &.MuiAppBar-colorPrimary {
+    @include ui-bg-color($transparent-1);
+    backdrop-filter: blur(1.25rem);
+  }
+}

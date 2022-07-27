@@ -10,7 +10,7 @@ export interface AvatarProps extends MUIAvatarProps {
   alt?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   rounded?: boolean;
-  color?: "neutral" | "primary" | "secondary";
+  color?: "neutral" | "primary";
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -48,7 +48,7 @@ Avatar.propTypes = {
   name: PropTypes.string.isRequired,
   src: PropTypes.string,
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl"]),
-  color: PropTypes.oneOf(["neutral", "primary", "secondary"]),
+  color: PropTypes.oneOf(["neutral", "primary"]),
 };
 
 export default Avatar;

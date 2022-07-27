@@ -23,3 +23,7 @@
 .ui-rounded {
   @include ui-rounded;
 }
+
+.ui-border-1 {
+  @include ui-border(1px, solid, $border-color);
+}

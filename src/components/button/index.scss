@@ -1,5 +1,52 @@
 .ui-button {
   max-width: fit-content;
+  @include ui-font(1px, solid, $transparent);
+
+  &.MuiButton-containedNeutral {
+    @include ui-bg-color($gray-400);
+
+    &:hover {
+      @include ui-bg-color($gray-500);
+    }
+  }
+
+  &.MuiButton-outlinedNeutral {
+    @include ui-border-color($gray-400);
+
+    & > .MuiTouchRipple-root {
+      @include ui-font-color($gray-400);
+    }
+
+    & > .ui-typography.MuiTypography-button {
+      @include ui-font-color($gray-400);
+    }
+
+    &:hover {
+      @include ui-border-color($gray-400);
+      @include ui-bg-color($gray-50);
+    }
+
+    & > .MuiButton-startIcon > .MuiSvgIcon-root {
+      @include ui-fill($gray-400);
+    }
+  }
+
+  &.MuiButton-textNeutral {
+    @include ui-font-color($gray-400);
+
+    & > .MuiTouchRipple-root {
+      @include ui-font-color($gray-400);
+    }
+
+    & > .ui-typography.MuiTypography-button {
+      @include ui-font-color($gray-400);
+    }
+
+    &:hover {
+      @include ui-font-color($gray-400);
+      @include ui-bg-color($gray-50);
+    }
+  }
 
   &.MuiButton-containedPrimary {
     @include ui-bg-color($green-400);
@@ -112,5 +159,9 @@
     & > .MuiButton-startIcon {
       @include ui-m-0;
     }
+  }
+
+  &--rounded.MuiButton-root {
+    @include ui-rounded;
   }
 }
