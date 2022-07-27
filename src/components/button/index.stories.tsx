@@ -10,14 +10,14 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-export const DefaultButton: ComponentStory<typeof Button> = (args) => (
+export const DefaultButton: ComponentStory<typeof Button> = args => (
   <Button {...args} />
 );
 DefaultButton.args = {
   children: "Default Button",
 };
 
-export const IconButton: ComponentStory<typeof Button> = (args) => (
+export const IconButton: ComponentStory<typeof Button> = args => (
   <div>
     <Stack spacing={2}>
       <Button {...args} />
@@ -56,7 +56,7 @@ IconButton.args = {
   startIcon: <StarBorderIcon />,
 };
 
-export const LoadingButton: ComponentStory<typeof Button> = (args) => (
+export const LoadingButton: ComponentStory<typeof Button> = args => (
   <div>
     <Stack spacing={2}>
       <Button {...args}>Loading Button</Button>
