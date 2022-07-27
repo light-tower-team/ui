@@ -5,7 +5,7 @@ import "./index.scss";
 
 export interface BadgeProps extends MUIChipProps {}
 
-export const Badge: React.FC<BadgeProps> = (props) => {
+export const Badge: React.FC<BadgeProps> = props => {
   return <MUIChip {...props} className={"ui-badge"} />;
 };
 

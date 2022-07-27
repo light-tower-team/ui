@@ -47,7 +47,7 @@ export const HandleAttacher: React.FC<HandleAttacherProps> = ({
             for (let i = ctx.currentItemUUIDs.length - 1; i >= 0; --i) {
               if (
                 nextParentChildren.find(
-                  (c) => c.__uuid === ctx.currentItemUUIDs[i]
+                  c => c.__uuid === ctx.currentItemUUIDs[i]
                 )
               ) {
                 ctx.currentItemUUIDs.pop();

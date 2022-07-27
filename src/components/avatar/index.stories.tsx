@@ -8,7 +8,7 @@ export default {
   component: Avatar,
 } as ComponentMeta<typeof Avatar>;
 
-export const DefaultBadge: ComponentStory<typeof Avatar> = (args) => (
+export const DefaultBadge: ComponentStory<typeof Avatar> = args => (
   <Avatar {...args} />
 );
 

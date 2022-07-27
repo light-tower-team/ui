@@ -12,7 +12,7 @@ export interface BreadcrumbsLinkProps extends ButtonProps {
   text: string;
 }
 
-export const BreadcrumbsLink: React.FC<BreadcrumbsLinkProps> = (props) => {
+export const BreadcrumbsLink: React.FC<BreadcrumbsLinkProps> = props => {
   return (
     <Button className={styles["ui-breadcrumbs__link"]} {...props}></Button>
   );
@@ -83,9 +83,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         />
       }
       color="secondary"
-      onClose={(href) => href && onRedirect(href.toString())}
+      onClose={href => href && onRedirect(href.toString())}
     >
-      {c.slice(1, c.length - 1).map((c) => (
+      {c.slice(1, c.length - 1).map(c => (
         <DropdownMenuItem
           key={c.props.href}
           startIcon={

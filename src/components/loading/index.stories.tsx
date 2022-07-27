@@ -7,6 +7,6 @@ export default {
   component: Loading,
 } as ComponentMeta<typeof Loading>;
 
-export const DefaultLoading: ComponentStory<typeof Loading> = (args) => (
+export const DefaultLoading: ComponentStory<typeof Loading> = args => (
   <Loading {...args} />
 );

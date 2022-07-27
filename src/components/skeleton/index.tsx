@@ -5,7 +5,7 @@ import MUISkeleton, {
 
 export type SkeletonProps = MUISkeletonProps;
 
-export const Skeleton: React.FC<SkeletonProps> = (props) => {
+export const Skeleton: React.FC<SkeletonProps> = props => {
   return <MUISkeleton {...props}></MUISkeleton>;
 };
 

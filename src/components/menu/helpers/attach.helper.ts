@@ -31,7 +31,7 @@ export default function attach(
       ...props,
       __uuid: newChild.__uuid,
       key: newChild.__uuid,
-      children: newChild.__children.map((c) => c.__el),
+      children: newChild.__children.map(c => c.__el),
       onClick: (e: React.MouseEvent<HTMLElement>) =>
         props?.onClick && props?.onClick(e, newChild.__uuid),
       onMouseEnter: (e: React.MouseEvent<HTMLElement>) =>

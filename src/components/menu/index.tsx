@@ -54,7 +54,7 @@ export const Menu: React.FC<MenuProps> = ({
       collapse: false,
       hovering: false,
       placement,
-      mutate: (newCtx) => setCtx({ ...newCtx }),
+      mutate: newCtx => setCtx({ ...newCtx }),
     });
   }, [selectFirstItem, children, placement]);
 
@@ -106,9 +106,7 @@ export const Menu: React.FC<MenuProps> = ({
 
   return (
     <MenuContext.Provider value={ctx}>
-      <FocusableBox
-        onKeyDown={(e) => keyPressHandler(e, ctx, closeMenuHandler)}
-      >
+      <FocusableBox onKeyDown={e => keyPressHandler(e, ctx, closeMenuHandler)}>
         {ahr}
       </FocusableBox>
       <MenuPopover

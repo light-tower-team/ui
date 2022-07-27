@@ -60,8 +60,8 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
   React.useEffect(() => {
     const items = attach(
       options
-        .filter((t) => !value.length || t.displayName.startsWith(value))
-        .map((o) => <MenuItem key={o.uuid} text={o.displayName} value={o} />),
+        .filter(t => !value.length || t.displayName.startsWith(value))
+        .map(o => <MenuItem key={o.uuid} text={o.displayName} value={o} />),
       {} as MenuItemType,
       {}
     );
@@ -72,7 +72,7 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
       collapse: false,
       hovering: false,
       placement: "bottom-start",
-      mutate: (newCtx) => setCtx({ ...newCtx }),
+      mutate: newCtx => setCtx({ ...newCtx }),
     });
   }, [value, options, confirmClosing]);
 

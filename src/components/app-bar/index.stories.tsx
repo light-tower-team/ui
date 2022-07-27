@@ -13,7 +13,7 @@ export default {
   component: AppBar,
 } as ComponentMeta<typeof AppBar>;
 
-export const DefaultAppBar: ComponentStory<typeof AppBar> = (args) => (
+export const DefaultAppBar: ComponentStory<typeof AppBar> = args => (
   <Stack className="ui-border-1 ui-pos-rel ui-h-screen">
     <AppBar {...args}>
       <Stack

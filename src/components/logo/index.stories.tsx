@@ -7,6 +7,6 @@ export default {
   component: Logo,
 } as ComponentMeta<typeof Logo>;
 
-export const DefaultLogo: ComponentStory<typeof Logo> = (args) => (
+export const DefaultLogo: ComponentStory<typeof Logo> = args => (
   <Logo {...args} />
 );

@@ -11,8 +11,8 @@ module.exports = {
   core: {
     builder: "@storybook/builder-webpack5",
   },
-  webpackFinal: async (config) => {
-    config.module.rules = config.module.rules.map((rule) =>
+  webpackFinal: async config => {
+    config.module.rules = config.module.rules.map(rule =>
       rule.test.test(".svg") ? { ...rule, exclude: /assets.+\.svg$/ } : rule
     );
 
