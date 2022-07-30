@@ -128,17 +128,27 @@ export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
 
       item.classList.remove("ui-dropdown-menu-item--focused");
 
-      let nextItem = item;
+      let nextItem = null;
 
-      if (e.code === "ArrowDown" && i + 1 < items.length) {
-        nextItem = items[i + 1];
-        nextItem.scrollIntoView(false);
-      } else if (e.code === "ArrowUp" && i - 1 >= 0) {
-        nextItem = items[i - 1];
-        nextItem.scrollIntoView();
+      if (e.code === "ArrowDown") {
+        if (i + 1 < items.length) {
+          nextItem = items[i + 1];
+          nextItem.scrollIntoView(false);
+        } else {
+          nextItem = items[0];
+          nextItem.scrollIntoView();
+        }
+      } else if (e.code === "ArrowUp") {
+        if (i - 1 >= 0) {
+          nextItem = items[i - 1];
+          nextItem.scrollIntoView();
+        } else {
+          nextItem = items[items.length - 1];
+          nextItem.scrollIntoView(false);
+        }
       }
 
-      nextItem.classList.add("ui-dropdown-menu-item--focused");
+      nextItem?.classList.add("ui-dropdown-menu-item--focused");
       return;
     }
 
