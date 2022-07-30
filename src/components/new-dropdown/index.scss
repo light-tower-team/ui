@@ -72,5 +72,12 @@
       @include ui-my-4;
       @include ui-bg-color($border-color);
     }
+
+    &-section {
+      &-label {
+        @include ui-py-4;
+        @include ui-px-6;
+      }
+    }
   }
 }

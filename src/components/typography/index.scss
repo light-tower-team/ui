@@ -4,23 +4,23 @@
   }
 
   &.MuiTypography-h2 {
-    @include ui-font(2.5rem, 600, $gray-650);
+    @include ui-font(2.5rem, 700, $gray-650);
   }
 
   &.MuiTypography-h3 {
-    @include ui-font(2rem, 600, $gray-650);
+    @include ui-font(2rem, 700, $gray-650);
   }
 
   &.MuiTypography-h4 {
-    @include ui-font(1.5rem, 500, $gray-650);
+    @include ui-font(1.5rem, 700, $gray-650);
   }
 
   &.MuiTypography-h5 {
-    @include ui-font(1rem, 500, $gray-650);
+    @include ui-font(1rem, 700, $gray-650);
   }
 
   &.MuiTypography-h6 {
-    @include ui-font(0.875rem, 500, $gray-650);
+    @include ui-font(0.875rem, 700, $gray-650);
   }
 
   &.MuiTypography-body1 {

@@ -5,6 +5,7 @@ import DropdownFooter from "./components/footer";
 import DropdownHeader from "./components/header";
 import DropdownMenuItem from "./components/item";
 import DropdownMenu from "./components/menu";
+import DropdownSection from "./components/section";
 import DropdownSubMenu from "./components/submenu";
 import DropdownContext, {
   IDropdownContext,
@@ -189,4 +190,5 @@ export default Object.assign(Dropdown, {
   Header: DropdownHeader,
   Footer: DropdownFooter,
   Divider: DropdownDivider,
+  Section: DropdownSection,
 });

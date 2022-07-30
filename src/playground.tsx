@@ -77,7 +77,20 @@ root.render(
               })
             }
           </Dropdown.SubMenu>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Section label="Nested First Item">
+            <Dropdown.Item onClick={click}>
+              Nested Nested Nested First Item
+            </Dropdown.Item>
+            <Dropdown.Item onClick={click}>
+              Nested Nested Nested Second Item
+            </Dropdown.Item>
+            <Dropdown.Item onClick={click}>
+              Nested Nested Nested Third Item
+            </Dropdown.Item>
+            <Dropdown.Item onClick={click}>
+              Nested Nested Nested Fourth Item
+            </Dropdown.Item>
+          </Dropdown.Section>
           <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
           <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
           <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
