@@ -64,5 +64,13 @@
         @include ui-bg-color($gray-100);
       }
     }
+
+    &-divider {
+      @include ui-flex-fixed;
+      @include ui-w-full;
+      @include ui-h(1px);
+      @include ui-my-4;
+      @include ui-bg-color($border-color);
+    }
   }
 }

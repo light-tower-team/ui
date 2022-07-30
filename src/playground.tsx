@@ -32,6 +32,7 @@ root.render(
               <Dropdown.Item onClick={click}>
                 Nested Nested Second Item
               </Dropdown.Item>
+              <Dropdown.Divider />
               <Dropdown.Item onClick={click}>
                 Nested Nested Third Item
               </Dropdown.Item>

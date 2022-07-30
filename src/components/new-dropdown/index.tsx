@@ -1,5 +1,6 @@
 import React from "react";
 import Button, { ButtonProps } from "../button";
+import DropdownDivider from "./components/divider";
 import DropdownFooter from "./components/footer";
 import DropdownHeader from "./components/header";
 import DropdownMenuItem from "./components/item";
@@ -187,4 +188,5 @@ export default Object.assign(Dropdown, {
   SubMenu: DropdownSubMenu,
   Header: DropdownHeader,
   Footer: DropdownFooter,
+  Divider: DropdownDivider,
 });
