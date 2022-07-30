@@ -1,13 +1,13 @@
 import React from "react";
 import Popper from "../../popper";
-import DropdownMenuItem, { DropdownMenuItemProps } from "./item";
+import DropdownMenuItem from "./item";
 import DropdownContext from "../helpers/context";
-import DropdownMenuInner from "./menu-inner";
+import DropdownMenuInner, { DynamicSubMenuFunc } from "./menu-inner";
 
-export interface DropdownSubMenuProps extends DropdownMenuItemProps {
+export interface DropdownSubMenuProps {
   depth: number;
   label: string;
-  children?: React.ReactElement | React.ReactElement[];
+  children?: React.ReactElement | React.ReactElement[] | DynamicSubMenuFunc;
 }
 
 export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({

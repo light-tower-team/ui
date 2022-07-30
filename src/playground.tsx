@@ -57,30 +57,44 @@ root.render(
           </Dropdown.SubMenu>
           <Dropdown.Item onClick={click}>Third Item</Dropdown.Item>
           <Dropdown.Item onClick={click}>Fourth Item</Dropdown.Item>
-          <Dropdown.SubMenu label="Fifth Item" depth={1}>
-            <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-            <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-            <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
+          <Dropdown.SubMenu label="Dynamic Fifth Item" depth={1}>
+            {() =>
+              new Promise<React.ReactElement[]>(res => {
+                setTimeout(() => {
+                  res([
+                    <Dropdown.Item key={1} onClick={click}>
+                      Nested First Item
+                    </Dropdown.Item>,
+                    <Dropdown.Item key={2} onClick={click}>
+                      Nested Second Item
+                    </Dropdown.Item>,
+                    <Dropdown.Item key={3} onClick={click}>
+                      Nested Fourth Item
+                    </Dropdown.Item>,
+                  ]);
+                }, 1000);
+              })
+            }
           </Dropdown.SubMenu>
+          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
+          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
           <Dropdown.Footer>
             <Dropdown.Item onClick={click}>Footer First Item</Dropdown.Item>
             <Dropdown.Item onClick={click}>Footer Second Item</Dropdown.Item>
           </Dropdown.Footer>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
         </Dropdown>
       </Stack>
     </ThemeProvider>

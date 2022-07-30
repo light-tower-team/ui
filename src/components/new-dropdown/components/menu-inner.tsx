@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import Stack, { StackProps } from "../../stack";
-import DropdownContext, { useDropdownContext } from "../helpers/context";
+import PropTypes from "prop-types";
+import Stack from "../../stack";
+import { useDropdownContext } from "../helpers/context";
 import DropdownFooter from "./footer";
 import DropdownHeader from "./header";
-import PropTypes from "prop-types";
+import Loading from "../../loading";
 
 const find = (
   children: React.ReactElement | React.ReactElement[],
@@ -33,18 +34,45 @@ const filter = (
   return elements;
 };
 
+export type DynamicSubMenuFunc = () => Promise<
+  React.ReactElement | React.ReactElement[]
+>;
+
 export interface DropdownMenuInnerProps {
-  children?: any;
+  children?: React.ReactElement | React.ReactElement[] | DynamicSubMenuFunc;
 }
 
 export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
   React.forwardRef(({ children, ...props }, ref) => {
     const { ctx, close } = useDropdownContext();
     const contentRef = React.useRef<HTMLDivElement | null>(null);
+    const [content, setContant] = React.useState<
+      React.ReactElement | React.ReactElement[]
+    >([]);
+    const [loading, setLoading] = React.useState<boolean>(false);
+
+    React.useLayoutEffect(() => {
+      if (!children) return;
+
+      if (typeof children === "function") {
+        setLoading(true);
+
+        children()
+          .then(c => setContant(c))
+          .finally(() => setLoading(false));
+
+        return;
+      }
+
+      setContant(children);
+    }, [children]);
 
     React.useLayoutEffect(() => {
       const menuInner = contentRef.current?.parentElement;
-      const items = menuInner?.querySelectorAll(".ui-dropdown-menu-item") ?? [];
+
+      if (!menuInner) return;
+
+      const items = menuInner.querySelectorAll(".ui-dropdown-menu-item") ?? [];
 
       const onClick = close;
 
@@ -104,21 +132,31 @@ export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
           item.removeEventListener("mouseenter", onMouseEnter);
         }
       };
-    }, [ctx]);
-
-    if (!children) return null;
+    }, [ctx, content]);
 
     return (
       <Stack {...props} ref={ref} className="ui-dropdown-menu-inner">
-        <Stack className="ui-dropdown-header">
-          {find(children, DropdownHeader)}
-        </Stack>
-        <Stack ref={contentRef} className="ui-dropdown-content">
-          {filter(children, [DropdownHeader, DropdownFooter])}
-        </Stack>
-        <Stack className="ui-dropdown-footer">
-          {find(children, DropdownFooter)}
-        </Stack>
+        {loading ? (
+          <Stack
+            alignItems="center"
+            justifyContent="center"
+            className="ui-h-full"
+          >
+            <Loading />
+          </Stack>
+        ) : (
+          <>
+            <Stack className="ui-dropdown-header">
+              {find(content, DropdownHeader)}
+            </Stack>
+            <Stack ref={contentRef} className="ui-dropdown-content">
+              {filter(content, [DropdownHeader, DropdownFooter])}
+            </Stack>
+            <Stack className="ui-dropdown-footer">
+              {find(content, DropdownFooter)}
+            </Stack>
+          </>
+        )}
       </Stack>
     );
   });
