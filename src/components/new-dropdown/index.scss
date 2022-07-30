@@ -10,10 +10,10 @@
 
     &-label {
       @include ui-w-full;
-      justify-content: center;
       @include ui-px-8;
       @include ui-pb-4;
       @include ui-border-bottom(1px, solid, $border-color);
+      @include ui-text-center;
     }
   }
 
@@ -39,7 +39,7 @@
       @include ui-min-w(240px);
       @include ui-max-w(320px);
       @include ui-min-h(40px);
-      @include ui-max-h(360px);
+      @include ui-max-h(420px);
       @include ui-py-4;
       @include ui-border(1px, solid, $border-color);
       @include ui-rounded-1;
@@ -47,17 +47,23 @@
     }
 
     &-item {
-      @include ui-flex;
+      @include ui-w-full;
       @include ui-flex-fixed;
       @include ui-px-8;
       @include ui-font(0.875rem, 500, $gray-650);
-
-      list-style-type: none;
-
+      @include ui-gap(1rem);
+      @include ui-overflow-hidden;
       @include ui-cursor-pointer;
 
       &-label {
         @include ui-py-4;
+      }
+
+      &-start-icon,
+      &-end-icon {
+        @include ui-flex-fixed;
+        @include ui-flex-center;
+        @include ui-size(1.5rem);
       }
 
       &--focused {
@@ -76,7 +82,7 @@
     &-section {
       &-label {
         @include ui-py-4;
-        @include ui-px-6;
+        @include ui-px-8;
       }
     }
   }

@@ -1,10 +1,11 @@
 import React from "react";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import Popper from "../../popper";
-import DropdownMenuItem from "./item";
+import DropdownMenuItem, { DropdownMenuItemProps } from "./item";
 import DropdownContext from "../helpers/context";
 import DropdownMenuInner, { DynamicSubMenuFunc } from "./menu-inner";
-
-export interface DropdownSubMenuProps {
+export interface DropdownSubMenuProps
+  extends Omit<DropdownMenuItemProps, "children"> {
   depth: number;
   label: string;
   children?: React.ReactElement | React.ReactElement[] | DynamicSubMenuFunc;
@@ -22,8 +23,13 @@ export const DropdownSubMenu: React.FC<DropdownSubMenuProps> = ({
 
   return (
     <>
-      <DropdownMenuItem {...props} ref={toggleRef} data-submenu={true}>
-        {label} {">"}
+      <DropdownMenuItem
+        {...props}
+        ref={toggleRef}
+        endIcon={<KeyboardArrowRightIcon fontSize="small" />}
+        data-submenu={true}
+      >
+        {label}
       </DropdownMenuItem>
       <Popper
         ref={popoverRef}

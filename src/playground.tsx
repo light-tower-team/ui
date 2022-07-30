@@ -1,5 +1,6 @@
 import React from "react";
 import * as ReactDOMClient from "react-dom/client";
+import LabelIcon from "@mui/icons-material/Label";
 import { Stack } from "./components";
 import Dropdown from "./components/new-dropdown";
 import ThemeProvider from "./components/theme";
@@ -21,8 +22,14 @@ root.render(
       >
         <Dropdown>
           <Dropdown.Header label="Header"></Dropdown.Header>
-          <Dropdown.Item onClick={click}>First Item</Dropdown.Item>
-          <Dropdown.SubMenu label="Second Item" depth={1}>
+          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
+            First Item
+          </Dropdown.Item>
+          <Dropdown.SubMenu
+            label="Second Item"
+            depth={1}
+            startIcon={<LabelIcon />}
+          >
             <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
             <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
             <Dropdown.SubMenu label="Nested Third Item" depth={2}>
@@ -56,8 +63,12 @@ root.render(
             </Dropdown.SubMenu>
             <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
           </Dropdown.SubMenu>
-          <Dropdown.Item onClick={click}>Third Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Fourth Item</Dropdown.Item>
+          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
+            Third Item
+          </Dropdown.Item>
+          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
+            Fourth Item
+          </Dropdown.Item>
           <Dropdown.SubMenu label="Dynamic Fifth Item" depth={1}>
             {() =>
               new Promise<React.ReactElement[]>(res => {

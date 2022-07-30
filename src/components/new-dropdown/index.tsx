@@ -135,19 +135,17 @@ export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
       if (e.code === "ArrowDown") {
         if (i + 1 < items.length) {
           nextItem = items[i + 1];
-          nextItem.scrollIntoView(false);
         } else {
           nextItem = items[0];
-          nextItem.scrollIntoView();
         }
+        nextItem.scrollIntoView(false);
       } else if (e.code === "ArrowUp") {
         if (i - 1 >= 0) {
           nextItem = items[i - 1];
-          nextItem.scrollIntoView();
         } else {
           nextItem = items[items.length - 1];
-          nextItem.scrollIntoView(false);
         }
+        nextItem.scrollIntoView();
       }
 
       nextItem?.classList.add("ui-dropdown-menu-item--focused");

@@ -1,9 +1,8 @@
 @mixin ui-truncate($max-width: 100%) {
-  display: inline-flex;
+  display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: middle;
-  text-align: center;
   white-space: nowrap;
   max-width: $max-width;
 }
@@ -46,6 +45,10 @@
 
 @mixin ui-index-z($i) {
   z-index: $i;
+}
+
+@mixin ui-text-center() {
+  text-align: center;
 }
 
 @mixin cubic-transition {

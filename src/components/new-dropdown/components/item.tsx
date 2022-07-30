@@ -1,25 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "../../typography";
+import Stack, { StackProps } from "../../stack";
 
-export interface DropdownMenuItemProps
-  extends React.HTMLAttributes<HTMLLIElement> {
+export interface DropdownMenuItemProps extends StackProps {
   ref?: React.Ref<HTMLLIElement>;
+  startIcon?: React.ReactElement;
+  endIcon?: React.ReactElement;
 }
 
 export const DropdownMenuItem: React.FC<DropdownMenuItemProps> =
   React.forwardRef(
-    ({ children, ...props }, ref: React.Ref<HTMLLIElement> | undefined) => {
+    (
+      { children, startIcon, endIcon, className, ...props },
+      ref: React.Ref<HTMLLIElement> | undefined
+    ) => {
       return (
-        <li
+        <Stack
           {...props}
+          component="li"
           ref={ref}
-          className={["ui-dropdown-menu-item", props.className].join(" ")}
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          className={["ui-dropdown-menu-item", className].join(" ")}
         >
-          <Typography className="ui-dropdown-menu-item-label">
-            {children}
-          </Typography>
-        </li>
+          <Stack className="ui-dropdown-menu-item-start-icon">
+            {startIcon}
+          </Stack>
+          <Stack className="ui-w-full ui-overflow-hidden">
+            <Typography className="ui-dropdown-menu-item-label">
+              {children}
+            </Typography>
+          </Stack>
+          <Stack className="ui-dropdown-menu-item-start-icon">{endIcon}</Stack>
+        </Stack>
       );
     }
   );
@@ -27,7 +42,9 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> =
 DropdownMenuItem.displayName = "DropdownMenuItem";
 DropdownMenuItem.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.any,
+  children: PropTypes.node,
+  startIcon: PropTypes.element,
+  endIcon: PropTypes.element,
 };
 
 export default DropdownMenuItem;
