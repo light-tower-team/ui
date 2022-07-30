@@ -1,9 +1,9 @@
 import React from "react";
 
 export type MenuPlacement =
-  | "auto-end"
+  /* | "auto-end"
   | "auto-start"
-  | "auto"
+  | "auto" */
   | "bottom-end"
   | "bottom-start"
   | "bottom"

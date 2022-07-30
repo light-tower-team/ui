@@ -1,41 +1,31 @@
 import React from "react";
-import Button, { VariantButton } from "../button";
+import Button from "../button";
 import Menu, { MenuWithoutAnchorProps } from "../menu";
 
 export interface DropdownProps extends MenuWithoutAnchorProps {
   text: string;
-  variant?: VariantButton;
-  startIcon?: React.ReactElement | null;
-  color?:
-    | "inherit"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "error"
-    | "info"
-    | "warning";
+  variant?: "text" | "outlined" | "contained";
+  startIcon?: React.ReactElement;
+  color?: "neutral" | "primary";
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
   text,
   color = "primary",
   variant = "contained",
-  startIcon = null,
-  children = null,
-  placement = "right-start",
-  loading = false,
-  selectFirstItem = false,
+  startIcon,
+  children,
+  placement = "bottom-start",
+  loading,
+  selectFirstItem,
   onOpen = () => {},
   onClose = () => {},
   ...props
 }) => {
   const button = (
-    <Button
-      text={text}
-      startIcon={startIcon}
-      color={color}
-      variant={variant}
-    ></Button>
+    <Button startIcon={startIcon} color={color} variant={variant}>
+      {text}
+    </Button>
   );
 
   return (

@@ -9,7 +9,7 @@ import MenuContext, {
   MetadataProps,
 } from "../../helpers/context.helper";
 import find from "../../helpers/find.helper";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export interface MenuItemProps
   extends React.HTMLAttributes<HTMLElement>,
@@ -53,7 +53,7 @@ export const MenuItem: React.FC<MenuItemProps> = React.forwardRef(
         {...props}
       >
         {startIcon ? (
-          <ListItemIcon className={styles["ui-menu-item__start-icon"]}>
+          <ListItemIcon className="ui-menu-item__start-icon">
             {startIcon}
           </ListItemIcon>
         ) : null}
@@ -62,7 +62,7 @@ export const MenuItem: React.FC<MenuItemProps> = React.forwardRef(
           <ArrowRightIcon fontSize="small" />
         ) : null}
         {!currentChild?.__children.length ? (
-          <ListItemIcon className={styles["ui-menu-item__end-icon"]}>
+          <ListItemIcon className="ui-menu-item__end-icon">
             {endIcon}
           </ListItemIcon>
         ) : null}

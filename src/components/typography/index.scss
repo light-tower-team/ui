@@ -24,7 +24,7 @@
   }
 
   &.MuiTypography-body1 {
-    @include ui-font(1rem, 400, $gray-650);
+    @include ui-font(0.875rem, 400, $gray-650);
   }
 
   &.MuiTypography-body2 {

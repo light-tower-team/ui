@@ -1,7 +1,7 @@
 import React from "react";
 import Stack from "../../../stack";
 import Typography from "../../../typography";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export interface TokenProps {
   label: string;
@@ -9,7 +9,7 @@ export interface TokenProps {
 
 export const Token: React.FC<TokenProps> = ({ label }) => {
   return (
-    <Stack className={styles["ui-token"]}>
+    <Stack className={"ui-token"}>
       <Typography variant="subtitle1">{label}</Typography>
     </Stack>
   );

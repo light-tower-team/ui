@@ -1,16 +1,12 @@
 import React from "react";
 import Stack, { StackProps } from "../../../stack";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export type TokenGroupProps = StackProps;
 
 export const TokenGroup: React.FC<TokenGroupProps> = ({ children }) => {
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      className={styles["ui-token-group"]}
-    >
+    <Stack direction="row" alignItems="center" className={"ui-token-group"}>
       {children}
     </Stack>
   );

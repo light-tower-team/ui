@@ -112,10 +112,10 @@ export const Menu: React.FC<MenuProps> = ({
       <MenuPopover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        onClose={() => closeMenuHandler(null)}
+        // onClose={() => closeMenuHandler(null)}
       >
         {loading ? (
-          <Loading size={24} />
+          <Loading />
         ) : (
           <HandleAttacher onClick={closeMenuHandler}>
             {ctx.items}

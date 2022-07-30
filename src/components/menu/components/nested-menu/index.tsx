@@ -73,7 +73,7 @@ export const NestedMenu: React.FC<NestedMenuProps> = ({
       <MenuPopover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        onClose={handleClose}
+        // onClose={handleClose}
       >
         {children}
       </MenuPopover>

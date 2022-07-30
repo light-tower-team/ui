@@ -6,16 +6,14 @@ import DropdownMenuItem from "../dropdown/components/item";
 import Button, { ButtonProps } from "../button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import FolderIcon from "@mui/icons-material/Folder";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export interface BreadcrumbsLinkProps extends ButtonProps {
   text: string;
 }
 
 export const BreadcrumbsLink: React.FC<BreadcrumbsLinkProps> = props => {
-  return (
-    <Button className={styles["ui-breadcrumbs__link"]} {...props}></Button>
-  );
+  return <Button className="ui-breadcrumbs__link" {...props}></Button>;
 };
 
 export const separate = (
@@ -35,10 +33,7 @@ export const separate = (
     if (i + 1 === children.length) return separatedChildren;
 
     separatedChildren.push(
-      <KeyboardArrowRightIcon
-        key={i}
-        className={styles["ui-breadcrumbs__separator"]}
-      />
+      <KeyboardArrowRightIcon key={i} className="ui-breadcrumbs__separator" />
     );
   }
 
@@ -61,11 +56,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   if (c.length < 5) {
     return (
-      <Stack
-        direction="row"
-        alignItems="center"
-        className={styles["ui-breadcrumbs"]}
-      >
+      <Stack direction="row" alignItems="center" className="ui-breadcrumbs">
         {separate(c, { onRedirect })}
       </Stack>
     );
@@ -78,24 +69,20 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       placement="bottom-start"
       variant="outlined"
       startIcon={
-        <MoreHorizIcon
-          className={styles["ui-breadcrumbs__collapse-btn-icon"]}
-        />
+        <MoreHorizIcon className="ui-breadcrumbs__collapse-btn-icon" />
       }
-      color="secondary"
-      onClose={href => href && onRedirect(href.toString())}
+      color="neutral"
+      onClose={(href: any) => href && onRedirect(href.toString())}
     >
       {c.slice(1, c.length - 1).map(c => (
         <DropdownMenuItem
           key={c.props.href}
           startIcon={
-            <FolderIcon
-              className={styles["ui-breadcrumbs__collapse-btn-icon"]}
-            />
+            <FolderIcon className="ui-breadcrumbs__collapse-btn-icon" />
           }
           text={c.props.text}
           value={c.props.href}
-          className={styles["ui-breadcrumbs__collapse-item"]}
+          className="ui-breadcrumbs__collapse-item"
         ></DropdownMenuItem>
       ))}
     </Dropdown>
@@ -105,11 +92,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const lastChild = c[c.length - 1];
 
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      className={styles["ui-breadcrumbs"]}
-    >
+    <Stack direction="row" alignItems="center" className="ui-breadcrumbs">
       {separate([firstChild, dropdown, lastChild], { onRedirect })}
     </Stack>
   );

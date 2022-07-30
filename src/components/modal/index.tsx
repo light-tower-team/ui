@@ -1,7 +1,7 @@
 import React from "react";
 import MUIModal, { ModalProps as MUIModalProps } from "@mui/material/Modal";
 import Stack, { StackProps } from "../stack";
-import styles from "./index.module.scss";
+import "./index.scss";
 
 export interface ModalContentProps extends StackProps {
   header?: React.ReactElement;
@@ -16,13 +16,10 @@ export const ModalContent: React.FC<ModalContentProps> = ({
   ...props
 }) => {
   return (
-    <Stack
-      className={[styles["ui-modal__content"], props.className].join()}
-      {...props}
-    >
-      <Stack className={styles["ui-modal__header"]}>{header}</Stack>
-      <Stack className={styles["ui-modal__body"]}>{children}</Stack>
-      <Stack className={styles["ui-modal__footer"]}>{footer}</Stack>
+    <Stack className={["ui-modal__content", props.className].join()} {...props}>
+      <Stack className="ui-modal__header">{header}</Stack>
+      <Stack className="ui-modal__body">{children}</Stack>
+      <Stack className="ui-modal__footer">{footer}</Stack>
     </Stack>
   );
 };
@@ -32,11 +29,7 @@ export type ModalProps = MUIModalProps;
 export const Modal: React.FC<ModalProps> = ({ children, ...props }) => {
   return (
     <MUIModal {...props}>
-      <Stack
-        justifyContent="center"
-        alignItems="center"
-        className={styles["ui-modal"]}
-      >
+      <Stack justifyContent="center" alignItems="center" className="ui-modal">
         {children}
       </Stack>
     </MUIModal>

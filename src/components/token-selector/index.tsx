@@ -13,10 +13,9 @@ import MenuContext, {
   MenuItemType,
 } from "../menu/helpers/context.helper";
 import keyPressHandler from "../menu/helpers/key-press-handler.helper";
-import styles from "./index.module.scss";
 import Token from "./components/token";
 import TokenGroup from "./components/token-group";
-import "./index.module.scss";
+import "./index.scss";
 
 export interface TokenType extends Record<string, unknown> {
   uuid: string;
@@ -72,7 +71,7 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
       collapse: false,
       hovering: false,
       placement: "bottom-start",
-      mutate: newCtx => setCtx({ ...newCtx }),
+      mutate: (newCtx: any) => setCtx({ ...newCtx }),
     });
   }, [value, options, confirmClosing]);
 
@@ -168,7 +167,7 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
     <HandleAttacher onClick={closeMenuHandler}>{ctx.items}</HandleAttacher>
   );
 
-  if (loading) items = <Loading size={24} />;
+  if (loading) items = <Loading />;
 
   if (!loading && !ctx.items.length && !hideOptionsWithoutItems)
     items = <Typography>Oops! The criteria was not found</Typography>;
@@ -178,7 +177,7 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
       <Stack
         direction="row"
         alignItems="center"
-        className={styles["ui-token-selector"]}
+        className={"ui-token-selector"}
       >
         <Stack direction="row" alignItems="center">
           {groupedTokens}
@@ -190,12 +189,12 @@ export const TokenSelector: React.FC<TokenSelectorProps> = ({
           onClick={openMenuHandler}
           onInput={inputHandler}
           value={value}
-          className={styles["ui-token-selector__input"]}
+          className={"ui-token-selector__input"}
         />
         <MenuPopover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
-          onClose={() => closeMenuHandler(null)}
+          // onClose={() => closeMenuHandler(null)}
         >
           {items}
         </MenuPopover>

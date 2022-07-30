@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import MUIStack, { StackProps as MUIStackProps } from "@mui/material/Stack";
 
-export type StackProps = MUIStackProps;
+export type StackProps = MUIStackProps & { component?: React.ElementType };
 
 export const Stack: React.FC<StackProps> = React.forwardRef(
   ({ children, ...props }, ref) => {
