@@ -40,9 +40,11 @@ export interface DropdownMenuInnerProps {
 export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
   React.forwardRef(({ children, ...props }, ref) => {
     const { ctx, close } = useDropdownContext();
+    const contentRef = React.useRef<HTMLDivElement | null>(null);
 
     React.useLayoutEffect(() => {
-      const items = document.querySelectorAll(".ui-dropdown-menu-item");
+      const menuInner = contentRef.current?.parentElement;
+      const items = menuInner?.querySelectorAll(".ui-dropdown-menu-item") ?? [];
 
       const onClick = close;
 
@@ -83,6 +85,19 @@ export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
         item.addEventListener("mouseenter", onMouseEnter);
       }
 
+      const currentMenu = menuInner?.parentElement;
+
+      if (
+        currentMenu &&
+        !currentMenu.querySelector(".ui-dropdown-menu-item--focused")
+      ) {
+        const items = currentMenu.querySelectorAll(".ui-dropdown-menu-item");
+
+        if (items.length) {
+          items.item(0).classList.add("ui-dropdown-menu-item--focused");
+        }
+      }
+
       return () => {
         for (const item of items) {
           item.removeEventListener("click", onClick);
@@ -98,7 +113,7 @@ export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
         <Stack className="ui-dropdown-header">
           {find(children, DropdownHeader)}
         </Stack>
-        <Stack className="ui-dropdown-content">
+        <Stack ref={contentRef} className="ui-dropdown-content">
           {filter(children, [DropdownHeader, DropdownFooter])}
         </Stack>
         <Stack className="ui-dropdown-footer">
