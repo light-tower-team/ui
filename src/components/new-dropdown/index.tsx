@@ -32,7 +32,6 @@ export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
       setCtx({
         ...initialContext,
         mutate: newCtx => setCtx(newCtx),
-        close: onMenuBlurHandler,
       }),
     []
   );

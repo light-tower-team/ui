@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import Stack, { StackProps } from "../../stack";
-import DropdownContext from "../helpers/context";
+import DropdownContext, { useDropdownContext } from "../helpers/context";
 import DropdownFooter from "./footer";
 import DropdownHeader from "./header";
 import PropTypes from "prop-types";
@@ -39,12 +39,12 @@ export interface DropdownMenuInnerProps {
 
 export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
   React.forwardRef(({ children, ...props }, ref) => {
-    const ctx = React.useContext(DropdownContext);
+    const { ctx, close } = useDropdownContext();
 
     React.useLayoutEffect(() => {
       const items = document.querySelectorAll(".ui-dropdown-menu-item");
 
-      const onClick = () => ctx.close();
+      const onClick = close;
 
       const onMouseEnter = (e: Event) => {
         const currentElement = e.currentTarget as HTMLElement;
