@@ -17,7 +17,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     <Popper
       {...props}
       PaperProps={{
-        className: "ui-dropdown-menu",
+        className: ["ui-dropdown", "ui-dropdown-menu"].join(" "),
         "data-open": true,
         "data-depth": 0,
       }}

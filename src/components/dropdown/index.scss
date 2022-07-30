@@ -1,5 +1,5 @@
 .ui-dropdown {
-  @include ui-pos-rel;
+  @include ui-my-2;
 
   &-header {
     @include ui-flex-fixed;
@@ -64,6 +64,8 @@
         @include ui-flex-fixed;
         @include ui-flex-center;
         @include ui-size(1.5rem);
+        @include ui-fill($gray-400);
+        @include ui-font-color($gray-400);
       }
 
       &--focused {
@@ -81,7 +83,7 @@
 
     &-section {
       &-label {
-        @include ui-py-4;
+        @include ui-pb-4;
         @include ui-px-8;
       }
     }

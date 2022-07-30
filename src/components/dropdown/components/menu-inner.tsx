@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import Stack from "../../stack";
@@ -9,7 +8,7 @@ import Loading from "../../loading";
 
 const find = (
   children: React.ReactElement | React.ReactElement[],
-  type: string | React.JSXElementConstructor<any>
+  type: string | React.JSXElementConstructor<never>
 ) => {
   const c = Array.isArray(children) ? children : [children];
 
@@ -20,7 +19,7 @@ const find = (
 
 const filter = (
   children: React.ReactElement | React.ReactElement[],
-  types: (string | React.JSXElementConstructor<any>)[]
+  types: (string | React.JSXElementConstructor<never>)[]
 ): React.ReactElement[] => {
   const c = Array.isArray(children) ? children : [children];
   const elements: React.ReactElement[] = [];
@@ -162,8 +161,8 @@ export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
   });
 
 DropdownMenuInner.displayName = "DropdownMenuInner";
-/* DropdownMenuInner.propTypes = {
+DropdownMenuInner.propTypes = {
   children: PropTypes.element,
-}; */
+};
 
 export default DropdownMenuInner;

@@ -1,127 +1,13 @@
 import React from "react";
 import * as ReactDOMClient from "react-dom/client";
-import LabelIcon from "@mui/icons-material/Label";
-import { Stack } from "./components";
-import Dropdown from "./components/new-dropdown";
 import ThemeProvider from "./components/theme";
 import "./scss/main.global.scss";
 
 const rootElement = document.getElementById("root");
 const root = ReactDOMClient.createRoot(rootElement as HTMLElement);
 
-const click = (e: React.MouseEvent) =>
-  console.log("Item: ", e.currentTarget.innerHTML);
-
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        className="ui-w-full ui-pt-14"
-      >
-        <Dropdown>
-          <Dropdown.Header label="Header"></Dropdown.Header>
-          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
-            First Item
-          </Dropdown.Item>
-          <Dropdown.SubMenu
-            label="Second Item"
-            depth={1}
-            startIcon={<LabelIcon />}
-          >
-            <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-            <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-            <Dropdown.SubMenu label="Nested Third Item" depth={2}>
-              <Dropdown.Item onClick={click}>
-                Nested Nested First Item
-              </Dropdown.Item>
-              <Dropdown.Item onClick={click}>
-                Nested Nested Second Item
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item onClick={click}>
-                Nested Nested Third Item
-              </Dropdown.Item>
-              <Dropdown.Item onClick={click}>
-                Nested Nested Fourth Item
-              </Dropdown.Item>
-              <Dropdown.SubMenu label="Nested Third Item" depth={3}>
-                <Dropdown.Item onClick={click}>
-                  Nested Nested Nested First Item
-                </Dropdown.Item>
-                <Dropdown.Item onClick={click}>
-                  Nested Nested Nested Second Item
-                </Dropdown.Item>
-                <Dropdown.Item onClick={click}>
-                  Nested Nested Nested Third Item
-                </Dropdown.Item>
-                <Dropdown.Item onClick={click}>
-                  Nested Nested Nested Fourth Item
-                </Dropdown.Item>
-              </Dropdown.SubMenu>
-            </Dropdown.SubMenu>
-            <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          </Dropdown.SubMenu>
-          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
-            Third Item
-          </Dropdown.Item>
-          <Dropdown.Item onClick={click} startIcon={<LabelIcon />}>
-            Fourth Item
-          </Dropdown.Item>
-          <Dropdown.SubMenu label="Dynamic Fifth Item" depth={1}>
-            {() =>
-              new Promise<React.ReactElement[]>(res => {
-                setTimeout(() => {
-                  res([
-                    <Dropdown.Item key={1} onClick={click}>
-                      Nested First Item
-                    </Dropdown.Item>,
-                    <Dropdown.Item key={2} onClick={click}>
-                      Nested Second Item
-                    </Dropdown.Item>,
-                    <Dropdown.Item key={3} onClick={click}>
-                      Nested Fourth Item
-                    </Dropdown.Item>,
-                  ]);
-                }, 1000);
-              })
-            }
-          </Dropdown.SubMenu>
-          <Dropdown.Section label="Nested First Item">
-            <Dropdown.Item onClick={click}>
-              Nested Nested Nested First Item
-            </Dropdown.Item>
-            <Dropdown.Item onClick={click}>
-              Nested Nested Nested Second Item
-            </Dropdown.Item>
-            <Dropdown.Item onClick={click}>
-              Nested Nested Nested Third Item
-            </Dropdown.Item>
-            <Dropdown.Item onClick={click}>
-              Nested Nested Nested Fourth Item
-            </Dropdown.Item>
-          </Dropdown.Section>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested First Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Second Item</Dropdown.Item>
-          <Dropdown.Item onClick={click}>Nested Fourth Item</Dropdown.Item>
-          <Dropdown.Footer>
-            <Dropdown.Item onClick={click}>Footer First Item</Dropdown.Item>
-            <Dropdown.Item onClick={click}>Footer Second Item</Dropdown.Item>
-          </Dropdown.Footer>
-        </Dropdown>
-      </Stack>
-    </ThemeProvider>
+    <ThemeProvider></ThemeProvider>
   </React.StrictMode>
 );

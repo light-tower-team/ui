@@ -1,5 +1,18 @@
-// import MenuFooter from "../../menu/components/";
+import React from "react";
+import Stack, { StackProps } from "../../stack";
 
-export const DropdownMenuFooter = null;
+export interface DropdownFooterProps extends StackProps {}
 
-export default DropdownMenuFooter;
+export const DropdownFooter: React.FC<DropdownFooterProps> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <Stack
+      {...props}
+      className={["ui-dropdown-footer-inner", className].join(" ")}
+    />
+  );
+};
+
+export default DropdownFooter;
