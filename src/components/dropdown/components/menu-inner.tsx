@@ -162,7 +162,7 @@ export const DropdownMenuInner: React.FC<DropdownMenuInnerProps> =
 
 DropdownMenuInner.displayName = "DropdownMenuInner";
 DropdownMenuInner.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.array,
 };
 
 export default DropdownMenuInner;

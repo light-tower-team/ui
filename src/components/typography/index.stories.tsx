@@ -20,6 +20,7 @@ export default {
         "body2",
         "subtitle1",
         "subtitle2",
+        "button",
       ],
     },
   },

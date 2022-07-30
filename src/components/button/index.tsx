@@ -9,6 +9,7 @@ export interface ButtonProps extends MUIButtonProps {
   color?: "neutral" | "primary"; // for correct display in the storybook
   loading?: boolean;
   rounded?: boolean;
+  component?: string;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -29,6 +30,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <MUIButton
+        {...props}
         ref={ref}
         startIcon={loading ? <Loading /> : startIcon}
         endIcon={isIconBtn ? null : endIcon}
@@ -40,7 +42,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         ].join(" ")}
         disabled={disabled || loading}
-        {...props}
       >
         <Typography variant="button" component="span">
           {children}

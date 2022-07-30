@@ -4,7 +4,7 @@ import DropdownDivider from "./components/divider";
 import DropdownFooter from "./components/footer";
 import DropdownHeader from "./components/header";
 import DropdownMenuItem from "./components/item";
-import DropdownMenu from "./components/menu";
+import DropdownMenu, { DropdownMenuProps } from "./components/menu";
 import DropdownSection from "./components/section";
 import DropdownSubMenu from "./components/submenu";
 import DropdownContext, {
@@ -15,18 +15,29 @@ import "./index.scss";
 
 export interface DropdownProps extends ButtonProps {
   children?: React.ReactElement | React.ReactElement[];
+  DropdownMenuProps?: Partial<DropdownMenuProps>;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
+export const Dropdown: React.FC<DropdownProps> = ({
+  children,
+  DropdownMenuProps,
+  onOpen = () => {},
+  onClose = () => {},
+  ...props
+}) => {
   const [ctx, setCtx] = React.useState<IDropdownContext>(initialContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const onToggleClickHandler = () => {
     ctx.mutate({ ...ctx, depth: 0 });
+    onOpen();
   };
 
   const onMenuBlurHandler = () => {
     ctx.mutate({ ...ctx, depth: -1 });
+    onClose();
   };
 
   React.useEffect(
@@ -159,14 +170,9 @@ export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
 
   return (
     <DropdownContext.Provider value={ctx}>
-      <Button
-        ref={setAnchorEl}
-        variant="outlined"
-        onClick={onToggleClickHandler}
-      >
-        Dropdown
-      </Button>
+      <Button {...props} ref={setAnchorEl} onClick={onToggleClickHandler} />
       <DropdownMenu
+        {...DropdownMenuProps}
         open={ctx.depth >= 0}
         anchorEl={anchorEl}
         placement="bottom-start"

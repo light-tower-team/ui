@@ -10,11 +10,11 @@ export default {
   component: Badge,
 } as ComponentMeta<typeof Badge>;
 
-export const DefaultBadge: ComponentStory<typeof Badge> = args => (
+export const Default: ComponentStory<typeof Badge> = args => (
   <Badge {...args} />
 );
 
-DefaultBadge.args = {
+Default.args = {
   label: "Default Badge",
 };
 

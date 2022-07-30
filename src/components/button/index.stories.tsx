@@ -10,14 +10,15 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-export const DefaultButton: ComponentStory<typeof Button> = args => (
+export const Default: ComponentStory<typeof Button> = args => (
   <Button {...args} />
 );
-DefaultButton.args = {
+
+Default.args = {
   children: "Default Button",
 };
 
-export const IconButton: ComponentStory<typeof Button> = args => (
+export const WithIcon: ComponentStory<typeof Button> = args => (
   <div>
     <Stack spacing={2}>
       <Button {...args} />
@@ -52,11 +53,12 @@ export const IconButton: ComponentStory<typeof Button> = args => (
     </Stack>
   </div>
 );
-IconButton.args = {
+
+WithIcon.args = {
   startIcon: <StarBorderIcon />,
 };
 
-export const LoadingButton: ComponentStory<typeof Button> = args => (
+export const WithLoadingState: ComponentStory<typeof Button> = args => (
   <div>
     <Stack spacing={2}>
       <Button {...args}>Loading Button</Button>
@@ -83,11 +85,12 @@ export const LoadingButton: ComponentStory<typeof Button> = args => (
     </Stack>
   </div>
 );
-LoadingButton.args = {
+
+WithLoadingState.args = {
   loading: true,
 };
 
-export const ButtonWithBadge: ComponentStory<typeof Button> = () => (
+export const WithBadge: ComponentStory<typeof Button> = () => (
   <div>
     <Stack spacing={2}>
       <Stack spacing={2}>
@@ -116,4 +119,5 @@ export const ButtonWithBadge: ComponentStory<typeof Button> = () => (
     </Stack>
   </div>
 );
-ButtonWithBadge.args = {};
+
+WithBadge.args = {};

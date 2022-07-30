@@ -1,5 +1,6 @@
 export * from "./avatar";
 export * from "./breadcrumbs";
+export * from "./breadcrumbs/components/link";
 export * from "./button";
 export * from "./badge";
 export * from "./dropdown";

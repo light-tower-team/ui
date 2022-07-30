@@ -1,23 +1,21 @@
 import React from "react";
-import Stack, { StackProps } from "../stack";
-import Dropdown from "../dropdown";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import DropdownMenuItem from "../dropdown/components/item";
-import Button, { ButtonProps } from "../button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import FolderIcon from "@mui/icons-material/Folder";
+import Stack, { StackProps } from "../stack";
+import Dropdown from "../dropdown";
+import DropdownMenuItem from "../dropdown/components/item";
+import BreadcrumbsLink, { BreadcrumbsLinkProps } from "./components/link";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import "./index.scss";
 
-export interface BreadcrumbsLinkProps extends ButtonProps {
-  text: string;
-}
-
-export const BreadcrumbsLink: React.FC<BreadcrumbsLinkProps> = props => {
-  return <Button className="ui-breadcrumbs__link" {...props}></Button>;
-};
+type BreadcrumbsChild = React.ReactElement<
+  BreadcrumbsLinkProps,
+  typeof BreadcrumbsLink
+>;
 
 export const separate = (
-  children: React.ReactElement[],
+  children: BreadcrumbsChild[],
   { onRedirect }: { onRedirect: (href: string) => void }
 ): React.ReactElement[] => {
   const separatedChildren: React.ReactElement[] = [];
@@ -25,7 +23,7 @@ export const separate = (
   for (let i = 0; i < children.length; ++i) {
     separatedChildren.push(
       React.cloneElement(children[i], {
-        ...children[i].props,
+        key: children[i].props.href,
         onClick: () => onRedirect(children[i].props.href),
       })
     );
@@ -33,15 +31,20 @@ export const separate = (
     if (i + 1 === children.length) return separatedChildren;
 
     separatedChildren.push(
-      <KeyboardArrowRightIcon key={i} className="ui-breadcrumbs__separator" />
+      <KeyboardArrowRightIcon
+        key={children[i].props.href + "__separator"}
+        className="ui-breadcrumbs__separator"
+        fontSize="small"
+      />
     );
   }
 
   return separatedChildren;
 };
 
-export interface BreadcrumbsProps extends StackProps {
-  onRedirect: (href: string) => void;
+export interface BreadcrumbsProps extends Omit<StackProps, "children"> {
+  children: BreadcrumbsChild | BreadcrumbsChild[];
+  onRedirect?: (href: string) => void;
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -50,14 +53,22 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 }) => {
   if (!children) return null;
 
-  const c: React.ReactElement[] = Array.isArray(children)
-    ? children
-    : [children];
+  const links: React.ReactElement<
+    BreadcrumbsLinkProps,
+    typeof BreadcrumbsLink
+  >[] = Array.isArray(children) ? children : [children];
 
-  if (c.length < 5) {
+  if (links.length < 5) {
+    const breadcrumbs = separate(links, { onRedirect });
+
+    const last = breadcrumbs[breadcrumbs.length - 1];
+
     return (
       <Stack direction="row" alignItems="center" className="ui-breadcrumbs">
-        {separate(c, { onRedirect })}
+        {[
+          ...breadcrumbs.slice(0, breadcrumbs.length - 1),
+          React.cloneElement(last, { startIcon: <FolderOpenIcon /> }),
+        ]}
       </Stack>
     );
   }
@@ -65,37 +76,35 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const dropdown = (
     <Dropdown
       key={-1}
-      text=""
-      placement="bottom-start"
-      variant="outlined"
-      startIcon={
-        <MoreHorizIcon className="ui-breadcrumbs__collapse-btn-icon" />
-      }
+      startIcon={<MoreHorizIcon />}
+      variant="text"
       color="neutral"
-      onClose={(href: any) => href && onRedirect(href.toString())}
+      rounded
     >
-      {c.slice(1, c.length - 1).map(c => (
+      {links.slice(1, links.length - 1).map(c => (
         <DropdownMenuItem
           key={c.props.href}
-          startIcon={
-            <FolderIcon className="ui-breadcrumbs__collapse-btn-icon" />
-          }
-          text={c.props.text}
-          value={c.props.href}
-          className="ui-breadcrumbs__collapse-item"
-        ></DropdownMenuItem>
+          startIcon={<FolderIcon />}
+          onClick={() => onRedirect(c.props.href)}
+        >
+          {c.props.children}
+        </DropdownMenuItem>
       ))}
     </Dropdown>
   );
 
-  const firstChild = c[0];
-  const lastChild = c[c.length - 1];
+  const firstLink = links[0];
+  const lastLink = React.cloneElement(links[links.length - 1], {
+    startIcon: <FolderOpenIcon />,
+  });
 
   return (
     <Stack direction="row" alignItems="center" className="ui-breadcrumbs">
-      {separate([firstChild, dropdown, lastChild], { onRedirect })}
+      {separate([firstLink, dropdown, lastLink], { onRedirect })}
     </Stack>
   );
 };
 
-export default Breadcrumbs;
+export default Object.assign(Breadcrumbs, {
+  Link: BreadcrumbsLink,
+});

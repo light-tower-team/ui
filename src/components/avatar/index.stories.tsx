@@ -8,15 +8,15 @@ export default {
   component: Avatar,
 } as ComponentMeta<typeof Avatar>;
 
-export const DefaultBadge: ComponentStory<typeof Avatar> = args => (
+export const Default: ComponentStory<typeof Avatar> = args => (
   <Avatar {...args} />
 );
 
-DefaultBadge.args = {
+Default.args = {
   name: "Avatar",
 };
 
-export const SizeBadge: ComponentStory<typeof Avatar> = () => (
+export const SizeAvatar: ComponentStory<typeof Avatar> = () => (
   <Stack spacing={2}>
     <Stack direction="row" spacing={2}>
       <Avatar name="avatar" size="xs" />
@@ -35,7 +35,7 @@ export const SizeBadge: ComponentStory<typeof Avatar> = () => (
   </Stack>
 );
 
-export const ColorBadge: ComponentStory<typeof Avatar> = () => (
+export const ColorAvatar: ComponentStory<typeof Avatar> = () => (
   <Stack spacing={2}>
     <Stack spacing={2}>
       <Stack direction="row" spacing={2}>

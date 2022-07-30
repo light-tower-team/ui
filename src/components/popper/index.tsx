@@ -1,13 +1,11 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import MUIPopper, { PopperProps as MUIPopperProps } from "@mui/material/Popper";
 import MUIPaper, { PaperProps as MUIPaperProps } from "@mui/material/Paper";
 import Fade from "@mui/material/Fade";
-import ThemeContext, { ThemeContextType } from "../theme/context";
-import Stack from "../stack";
 
 export interface PopperProps extends MUIPopperProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode | React.ReactElement;
   onOpen?: () => void;
   onClose?: () => void;
   PaperProps?: MUIPaperProps & Record<string, unknown>;
@@ -18,7 +16,6 @@ export const Popper: React.FC<PopperProps> = React.forwardRef(
     {
       open,
       children,
-      className,
       onOpen = () => {},
       onClose = () => {},
       PaperProps,
@@ -47,34 +44,12 @@ export const Popper: React.FC<PopperProps> = React.forwardRef(
 );
 
 Popper.displayName = "Popper";
-
-/* import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
-export interface PopperProps {
-  open: boolean;
-  anchorEl: HTMLElement;
-  children?: React.ReactElement;
-  placement?: Placement;
-}
-
-export const Popper: React.FC<PopperProps> = ({
-  open,
-  anchorEl,
-  placement,
-  children,
-}) => {
-  const [popperEl, setPopperEl] = React.useState<HTMLDivElement | null>(null);
-  const { styles, attributes } = usePopper(anchorEl, popperEl, {
-    placement,
-  });
-
-  if (!open) return null;
-
-  return (
-    <Stack ref={setPopperEl} style={styles.popper} {...attributes.popper}>
-      {children}
-    </Stack>
-  );
-}; */
+Popper.propTypes = {
+  open: PropTypes.bool.isRequired,
+  children: PropTypes.node,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  PaperProps: PropTypes.any,
+};
 
 export default Popper;
