@@ -1,9 +1,0 @@
-.ui-breadcrumbs {
-  @include -ui-ml-4;
-
-  &__separator,
-  &__link {
-    @include ui-font-color($gray-400);
-    @include ui-fill($gray-400);
-  }
-}
