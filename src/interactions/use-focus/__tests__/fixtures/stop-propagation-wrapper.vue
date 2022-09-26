@@ -1,11 +1,16 @@
 <template>
   <div tabindex="-1" :onFocus="onWrapperFocus" :onBlur="onWrapperBlur">
-    <focusable-element :onFocus="onInnerFocus" :onBlur="onInnerBlur" />
+    <focusable-element :on-focus="onInnerFocus" :on-blur="onInnerBlur" />
   </div>
 </template>
 
 <script setup lang="ts">
 import FocusableElement from "./focusable-element.vue";
 
-defineProps(["onInnerFocus", "onInnerBlur", "onWrapperFocus", "onWrapperBlur"]);
+defineProps<{
+  onInnerFocus: () => void;
+  onInnerBlur: () => void;
+  onWrapperFocus: () => void;
+  onWrapperBlur: () => void;
+}>();
 </script>

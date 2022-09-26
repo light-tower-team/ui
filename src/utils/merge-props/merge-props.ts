@@ -5,6 +5,7 @@ import chainFn from "./helpers/chain-fn";
 import isStr from "./helpers/is-str";
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

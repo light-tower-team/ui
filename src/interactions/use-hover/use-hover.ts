@@ -1,4 +1,4 @@
-import { onBeforeUpdate, Ref, ref } from "vue";
+import { onUnmounted, Ref, ref, toRef, watchEffect } from "vue";
 import { setProp } from "~/utils/set-prop";
 
 export type HoverType = "hoverstart" | "hoverend" | "hoverchange";
@@ -34,6 +34,7 @@ export interface UseHoverResult {
 export function useHover(props: UseHoverProps): UseHoverResult {
   const { onHoverStart, onHoverEnd, onHoverChange } = props;
 
+  const isDisabled = toRef(props, "isDisabled");
   const isHovered = ref(false);
 
   const state: {
@@ -47,7 +48,7 @@ export function useHover(props: UseHoverProps): UseHoverResult {
   ) => {
     state.pointerType = pointerType as PointerType;
 
-    if (props.isDisabled || isHovered.value || pointerType === "touch") return;
+    if (isDisabled.value || isHovered.value || pointerType === "touch") return;
 
     isHovered.value = true;
     state.target = target ?? undefined;
@@ -105,7 +106,7 @@ export function useHover(props: UseHoverProps): UseHoverResult {
     });
 
     setProp(hoverProps, "onPointerLeave", ({ target, pointerType }) => {
-      if (props.isDisabled) return;
+      if (isDisabled.value) return;
 
       onHoverEndHandle(target, pointerType as PointerType);
     });
@@ -115,17 +116,19 @@ export function useHover(props: UseHoverProps): UseHoverResult {
     });
 
     setProp(hoverProps, "onMouseLeave", ({ target }) => {
-      if (props.isDisabled) return;
+      if (isDisabled.value) return;
 
       onHoverEndHandle(target, "mouse");
     });
   }
 
-  onBeforeUpdate(() => {
-    if (props.isDisabled && state.target && state.pointerType) {
+  const stopIsDisabledWatch = watchEffect(() => {
+    if (isDisabled.value && state.target && state.pointerType) {
       onHoverEndHandle(state.target, state.pointerType);
     }
   });
+
+  onUnmounted(() => stopIsDisabledWatch());
 
   return {
     isHovered,

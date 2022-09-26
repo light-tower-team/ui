@@ -43,7 +43,9 @@ export function useSyntheticBlurEvent(onBlur: (e: FocusEvent) => void) {
       }
     };
 
-    target.addEventListener("focusout", onBlur as any, { once: true });
+    target.addEventListener("focusout", onBlur as EventListener, {
+      once: true,
+    });
 
     state.observer = new MutationObserver(() => {
       if (state.focused && target.disabled && state.observer) {

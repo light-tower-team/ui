@@ -10,6 +10,7 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   root: true,
   rules: {
-    "@typescript-eslint/no-empty-function": "allow",
+    "@typescript-eslint/no-empty-function": "off",
+    "vue/multi-word-component-names": "off",
   },
 };

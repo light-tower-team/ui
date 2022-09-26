@@ -1,4 +1,4 @@
-export function setProp(obj: object, propName: string, value: any): void {
+export function setProp<T>(obj: object, propName: string, value: T): void {
   let key = propName;
 
   if (__VUE__) {

@@ -70,7 +70,7 @@ describe("useFocus", () => {
     const addEvent = e => events.push({ type: e.type, target: e.target });
     const wrapper = render(FocusableElement, {
       props: {
-        disabled: true,
+        isDisabled: true,
         onFocus: addEvent,
         onBlur: addEvent,
         onFocusChange: focused => events.push({ type: "focuschange", focused }),
@@ -151,7 +151,7 @@ describe("useFocus", () => {
     expect(onFocus).toHaveBeenCalled();
 
     await wrapper.rerender({
-      disabled: true,
+      isDisabled: true,
       onFocus,
       onBlur,
     });

@@ -1,3 +1,4 @@
+import { onUnmounted, toRef, watchEffect } from "vue";
 import { useSyntheticBlurEvent } from "./use-synthetic-blur-event";
 
 export interface UseFocusProps {
@@ -16,11 +17,11 @@ export interface UseFocusResult {
 
 export function useFocus(props: UseFocusProps = {}): UseFocusResult {
   const {
-    isDisabled,
     onFocus: onFocusProp,
     onBlur: onBlurProp,
     onFocusChange: onFocusChangeProp,
   } = props;
+  const isDisabled = toRef(props, "isDisabled");
 
   const onBlur = (e: FocusEvent) => {
     if (e.target === e.currentTarget) {
@@ -54,15 +55,19 @@ export function useFocus(props: UseFocusProps = {}): UseFocusResult {
     focusProps: {},
   };
 
-  if (!isDisabled) {
-    if (onFocusProp || onFocusChangeProp || onBlurProp) {
-      result.focusProps.onFocus = onFocus;
-    }
+  const stopIsDisabledWatch = watchEffect(() => {
+    if (!isDisabled.value) {
+      if (onFocusProp || onFocusChangeProp || onBlurProp) {
+        result.focusProps.onFocus = onFocus;
+      }
 
-    if (onBlurProp || onFocusChangeProp) {
-      result.focusProps.onBlur = onBlur;
+      if (onBlurProp || onFocusChangeProp) {
+        result.focusProps.onBlur = onBlur;
+      }
     }
-  }
+  });
+
+  onUnmounted(() => stopIsDisabledWatch());
 
   return result;
 }
