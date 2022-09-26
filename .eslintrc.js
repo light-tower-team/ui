@@ -3,10 +3,13 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/vue3-recommended",
+    "plugin:vue/vue3-essential",
+    "@vue/eslint-config-typescript",
     "prettier",
   ],
-  parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
   root: true,
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-empty-function": "allow",
+  },
 };

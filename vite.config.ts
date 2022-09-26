@@ -14,6 +14,8 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       __DEV__: env.NODE_ENV === "development",
+      __VUE__: env.LIB === "vue",
+      __REACT__: env.REACT === "react",
     },
   };
 });

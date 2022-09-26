@@ -1,6 +1,5 @@
 import { describe, expect, it, test, vi } from "vitest";
 import { render, fireEvent, waitFor } from "@testing-library/vue";
-import { nextTick } from "vue";
 import FocusableElement from "./fixtures/focusable-element.vue";
 import FocusableButton from "./fixtures/focusable-button.vue";
 import CaptureWrapper from "./fixtures/capture-wrapper.vue";
@@ -86,10 +85,10 @@ describe("useFocus", () => {
   });
 
   test("events do not bubble when stopPropagation is called", async () => {
-    let onWrapperFocus = vi.fn();
-    let onWrapperBlur = vi.fn();
-    let onInnerFocus = vi.fn(e => e.stopPropagation());
-    let onInnerBlur = vi.fn(e => e.stopPropagation());
+    const onWrapperFocus = vi.fn();
+    const onWrapperBlur = vi.fn();
+    const onInnerFocus = vi.fn(e => e.stopPropagation());
+    const onInnerBlur = vi.fn(e => e.stopPropagation());
 
     const wrapper = render(StopPropagationWrapper, {
       props: {
@@ -111,10 +110,10 @@ describe("useFocus", () => {
   });
 
   test("events bubble by with capture attr", async () => {
-    let onWrapperFocus = vi.fn();
-    let onWrapperBlur = vi.fn();
-    let onInnerFocus = vi.fn();
-    let onInnerBlur = vi.fn();
+    const onWrapperFocus = vi.fn();
+    const onWrapperBlur = vi.fn();
+    const onInnerFocus = vi.fn();
+    const onInnerBlur = vi.fn();
 
     const wrapper = render(CaptureWrapper, {
       props: {

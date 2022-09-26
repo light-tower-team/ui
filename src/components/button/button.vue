@@ -1,12 +1,15 @@
 <template>
-  <button v-bind="focusProps">Hi!</button>
+  <button v-bind="props">{{ isHovered ? "hovered" : "idle" }}</button>
 </template>
 
 <script setup lang="ts">
-import { useFocus } from "~/interactions/use-focus/use-focus";
+import { mergeProps } from "~/utils/merge-props";
+import { useFocus } from "~/interactions/use-focus";
+import { useHover } from "~/interactions/use-hover";
 
-const { focusProps } = useFocus({
-  onFocus: () => console.log("focus"),
-  onBlur: () => console.log("blur"),
-});
+const { focusProps } = useFocus({});
+
+const { hoverProps, isHovered } = useHover({});
+
+const props = mergeProps(focusProps, hoverProps);
 </script>
