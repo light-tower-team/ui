@@ -1,5 +1,6 @@
 import { onUnmounted, Ref, ref, toRef, watchEffect } from "vue";
 import { PointerType } from "~/shared";
+import { isPointerEventAvailable } from "~/utils/is-pointer-event-available";
 import { setProp } from "~/utils/set-prop";
 
 export type HoverType = "hoverstart" | "hoverend" | "hoverchange";
@@ -99,7 +100,7 @@ export function useHover(props: UseHoverProps): UseHoverResult {
 
   const hoverProps: HoverProps = {};
 
-  if (typeof PointerEvent !== "undefined") {
+  if (isPointerEventAvailable()) {
     setProp(hoverProps, "onPointerEnter", ({ target, pointerType }) => {
       onHoverStartHandle(target, pointerType as PointerType);
     });
