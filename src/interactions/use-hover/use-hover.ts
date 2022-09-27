@@ -1,9 +1,8 @@
 import { onUnmounted, Ref, ref, toRef, watchEffect } from "vue";
+import { PointerType } from "~/shared";
 import { setProp } from "~/utils/set-prop";
 
 export type HoverType = "hoverstart" | "hoverend" | "hoverchange";
-
-export type PointerType = "mouse" | "pen" | "touch";
 
 export interface HoverProps {
   onPointerEnter?: (e: PointerEvent) => void;
