@@ -3,19 +3,17 @@ import { onUnmounted, reactive } from "vue";
 export function useSyntheticBlurEvent(onBlur: (e: FocusEvent) => void) {
   const state = reactive<{
     focused: boolean;
-    onBlur: (e: FocusEvent) => void;
     observer: MutationObserver | null;
   }>({
     focused: true,
-    onBlur,
     observer: null,
   });
 
   onUnmounted(() => {
-    if (state.observer) {
-      state.observer.disconnect();
-      state.observer = null;
-    }
+    if (!state.observer) return;
+
+    state.observer.disconnect();
+    state.observer = null;
   });
 
   return (e: FocusEvent) => {
@@ -30,11 +28,11 @@ export function useSyntheticBlurEvent(onBlur: (e: FocusEvent) => void) {
     state.focused = true;
 
     const target = e.target;
-    const onBlur = (e: FocusEvent) => {
+    const onBlurHandler = (e: Event) => {
       state.focused = false;
 
       if (target.disabled) {
-        state.onBlur?.(new FocusEvent("blur", e));
+        onBlur?.(new FocusEvent("blur", e));
       }
 
       if (state.observer) {
@@ -43,7 +41,7 @@ export function useSyntheticBlurEvent(onBlur: (e: FocusEvent) => void) {
       }
     };
 
-    target.addEventListener("focusout", onBlur as EventListener, {
+    target.addEventListener("focusout", onBlurHandler, {
       once: true,
     });
 

@@ -1,6 +1,6 @@
 import { onUnmounted, ref } from "vue";
 
-export interface GlobalListeners {
+export interface UseGlobalListenersResult {
   addGlobalListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
     type: K,
@@ -28,7 +28,7 @@ export interface GlobalListeners {
   removeAllGlobalListeners(): void;
 }
 
-export function useGlobalListeners() {
+export function useGlobalListeners(): UseGlobalListenersResult {
   const globalListeners = ref(new Map());
 
   const addGlobalListener = (eventTarget, type, listener, options) => {
