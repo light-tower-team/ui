@@ -27,9 +27,9 @@ describe("useFocusWithin", () => {
     await fireEvent.focusOut(el);
 
     expect(events).toEqual([
-      { type: "focus", target: el },
+      { type: "focus", target: el, isFocused: true },
       { type: "focuschange", target: el, isFocused: true },
-      { type: "blur", target: el },
+      { type: "blur", target: el, isFocused: false },
       { type: "focuschange", target: el, isFocused: false },
     ]);
   });
@@ -63,9 +63,9 @@ describe("useFocusWithin", () => {
     await fireEvent.focusOut(child);
 
     expect(events).toEqual([
-      { type: "focus", target: child },
+      { type: "focus", target: child, isFocused: true },
       { type: "focuschange", target: child, isFocused: true },
-      { type: "blur", target: child },
+      { type: "blur", target: child, isFocused: false },
       { type: "focuschange", target: child, isFocused: false },
     ]);
   });

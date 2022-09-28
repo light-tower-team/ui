@@ -1,36 +1,41 @@
-import { onUnmounted, toRef, watchEffect } from "vue";
+import { setProp } from "~/utils/set-prop";
+import { SyntheticFocusEvent } from "./events";
 import { useSyntheticBlurEvent } from "./use-synthetic-blur-event";
 
 export interface UseFocusProps {
   isDisabled?: boolean;
+  onFocus?: (e: SyntheticFocusEvent) => void;
+  onBlur?: (e: SyntheticFocusEvent) => void;
+  onFocusChange?: (e: SyntheticFocusEvent) => void;
+}
+
+export interface FocusProps {
   onFocus?: (e: FocusEvent) => void;
   onBlur?: (e: FocusEvent) => void;
-  onFocusChange?: (value: boolean) => void;
 }
 
 export interface UseFocusResult {
-  focusProps: {
-    onFocus?: (e: FocusEvent) => void;
-    onBlur?: (e: FocusEvent) => void;
-  };
+  focusProps: FocusProps;
 }
 
 export function useFocus(props: UseFocusProps = {}): UseFocusResult {
   const {
+    isDisabled,
     onFocus: onFocusProp,
     onBlur: onBlurProp,
     onFocusChange: onFocusChangeProp,
   } = props;
-  const isDisabled = toRef(props, "isDisabled");
 
   const onBlur = (e: FocusEvent) => {
     if (e.target === e.currentTarget) {
       if (onBlurProp) {
-        onBlurProp(e);
+        onBlurProp(new SyntheticFocusEvent("blur", e, { isFocused: false }));
       }
 
       if (onFocusChangeProp) {
-        onFocusChangeProp(false);
+        onFocusChangeProp(
+          new SyntheticFocusEvent("focuschange", e, { isFocused: false })
+        );
       }
     }
   };
@@ -40,36 +45,27 @@ export function useFocus(props: UseFocusProps = {}): UseFocusResult {
   const onFocus = (e: FocusEvent) => {
     if (e.target === e.currentTarget) {
       if (onFocusProp) {
-        onFocusProp(e);
+        onFocusProp(new SyntheticFocusEvent("focus", e, { isFocused: true }));
       }
 
       if (onFocusChangeProp) {
-        onFocusChangeProp(true);
+        onFocusChangeProp(
+          new SyntheticFocusEvent("focuschange", e, { isFocused: true })
+        );
       }
 
       onSyntheticFocus(e);
     }
   };
 
-  const result: UseFocusResult = {
-    focusProps: {},
-  };
+  const focusProps: FocusProps = {};
 
-  const stopIsDisabledWatch = watchEffect(() => {
-    if (!isDisabled.value) {
-      if (onFocusProp || onFocusChangeProp || onBlurProp) {
-        result.focusProps.onFocus = onFocus;
-      }
+  if (!isDisabled) {
+    setProp(focusProps, "onFocusIn", onFocus);
+    setProp(focusProps, "onFocusOut", onBlur);
+  }
 
-      if (onBlurProp || onFocusChangeProp) {
-        result.focusProps.onBlur = onBlur;
-      }
-    }
-  });
-
-  onUnmounted(() => stopIsDisabledWatch());
-
-  return result;
+  return { focusProps };
 }
 
 export default useFocus;

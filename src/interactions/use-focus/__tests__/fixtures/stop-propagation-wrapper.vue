@@ -1,5 +1,5 @@
 <template>
-  <div tabindex="-1" :onFocus="onWrapperFocus" :onBlur="onWrapperBlur">
+  <div tabindex="-1" @focusin="onWrapperFocus" @focusout="onWrapperBlur">
     <focusable-element :on-focus="onInnerFocus" :on-blur="onInnerBlur" />
   </div>
 </template>

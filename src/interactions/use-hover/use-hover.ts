@@ -31,7 +31,7 @@ export interface UseHoverResult {
   hoverProps: HoverProps;
 }
 
-export function useHover(props: UseHoverProps): UseHoverResult {
+export function useHover(props: UseHoverProps = {}): UseHoverResult {
   const { onHoverStart, onHoverEnd, onHoverChange } = props;
 
   const isDisabled = toRef(props, "isDisabled");

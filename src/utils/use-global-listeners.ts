@@ -1,5 +1,3 @@
-import { onUnmounted, ref } from "vue";
-
 export interface UseGlobalListenersResult {
   addGlobalListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
@@ -28,29 +26,25 @@ export interface UseGlobalListenersResult {
   removeAllGlobalListeners(): void;
 }
 
-export function useGlobalListeners(): UseGlobalListenersResult {
-  const globalListeners = ref(new Map());
+const listeners = new Map();
 
+export function useGlobalListeners(): UseGlobalListenersResult {
   const addGlobalListener = (eventTarget, type, listener, options) => {
-    globalListeners.value.set(listener, { type, eventTarget, options });
+    listeners.set(listener, { type, eventTarget, options });
     eventTarget.addEventListener(type, listener, options);
   };
 
   const removeGlobalListener = (eventTarget, type, listener, options) => {
-    const fn = globalListeners.value.get(listener)?.fn || listener;
+    const fn = listeners.get(listener)?.fn || listener;
     eventTarget.removeEventListener(type, fn, options);
-    globalListeners.value.delete(listener);
+    listeners.delete(listener);
   };
 
   const removeAllGlobalListeners = () => {
-    globalListeners.value.forEach((value, key) => {
+    listeners.forEach((value, key) => {
       removeGlobalListener(value.eventTarget, value.type, key, value.options);
     });
   };
-
-  onUnmounted(() => {
-    removeAllGlobalListeners();
-  });
 
   return { addGlobalListener, removeGlobalListener, removeAllGlobalListeners };
 }

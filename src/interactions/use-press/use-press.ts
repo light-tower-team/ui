@@ -2,7 +2,7 @@ import { HTMLAttributes, onUnmounted, Ref, ref, toRef } from "vue";
 import { PointerType } from "~/shared";
 import { isPointerEventAvailable } from "~/utils/is-pointer-event-available";
 import { setProp } from "~/utils/set-prop";
-import { useGlobalListeners } from "~/utils/use-global-listeners";
+import { useListeners } from "~/utils/use-listeners";
 import {
   createPressEvent,
   EventBase,
@@ -73,7 +73,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
     currentTarget: null,
   };
 
-  const { addGlobalListener, removeAllGlobalListeners } = useGlobalListeners();
+  const { addListener, removeAllListeners } = useListeners();
 
   const pressProps: HTMLAttributes = {};
 
@@ -160,7 +160,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
     cache.currentId = null;
     cache.currentTarget = null;
 
-    removeAllGlobalListeners();
+    removeAllListeners();
 
     if (!allowTextSelectionOnPress) restoreTextSelection();
   };
@@ -253,9 +253,9 @@ export function usePress<T extends HTMLElement = HTMLElement>(
         )
       );
 
-      addGlobalListener(document, "pointermove", onPointerMove, false);
-      addGlobalListener(document, "pointerup", onPointerUp, false);
-      addGlobalListener(document, "pointercancel", onPointerCancel, false);
+      addListener(document, "pointermove", onPointerMove, false);
+      addListener(document, "pointerup", onPointerUp, false);
+      addListener(document, "pointercancel", onPointerCancel, false);
     });
 
     setProp(pressProps, "onPointerUp", (e: PointerEvent) => {
@@ -301,7 +301,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
 
       triggerPressStart(createPressEvent<T>(e, cache.currentTarget, "mouse"));
 
-      addGlobalListener(document, "mouseup", onMouseUp, false);
+      addListener(document, "mouseup", onMouseUp, false);
     });
 
     setProp(pressProps, "onMouseUp", (e: MouseEvent) => {
@@ -392,9 +392,9 @@ export function usePress<T extends HTMLElement = HTMLElement>(
 
       triggerPressStart(createPressEvent<T>(e, cache.currentTarget, "touch"));
 
-      addGlobalListener(document, "touchmove", onTouchMove, false);
-      addGlobalListener(document, "touchend", onTouchEnd, false);
-      addGlobalListener(document, "touchcancel", onTouchCancel, false);
+      addListener(document, "touchmove", onTouchMove, false);
+      addListener(document, "touchend", onTouchEnd, false);
+      addListener(document, "touchcancel", onTouchCancel, false);
     });
   }
 
