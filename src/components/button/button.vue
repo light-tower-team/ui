@@ -1,21 +1,31 @@
 <template>
-  <button v-bind="props" ref="el">{{ isHovered ? "hovered" : "idle" }}</button>
+  <button
+    v-bind="props"
+    ref="el"
+    class="ui-btn"
+    :class="{ 'ui-focused': isFocusVisible }"
+  >
+    Testing
+  </button>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useButton } from "~/hooks/button";
+import { useFocusRign } from "~/hooks/focus";
 import { mergeProps } from "~/utils/merge-props";
-import { useHover } from "~/interactions/use-hover";
-import { useFocus } from "~/interactions/use-focus";
-import { useFocusable } from "~/hooks/focus/use-focusable";
 
-const el = ref(null);
+const el = ref<null | HTMLElement>(null);
 
-const { focusProps } = useFocus({});
+const { buttonProps } = useButton({}, el);
+const { focusProps, isFocusVisible } = useFocusRign(
+  {
+    autoFocus: true,
+  },
+  el
+);
 
-const { hoverProps, isHovered } = useHover({});
-
-const { focusableProps } = useFocusable({ autoFocus: true }, el);
-
-const props = mergeProps(focusableProps, focusProps, hoverProps);
+const props = mergeProps(buttonProps, focusProps);
 </script>
+
+<style lang="scss" src="./button.scss" />
