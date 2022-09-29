@@ -27,6 +27,7 @@ describe("useFocusable", () => {
       },
     });
     const el = wrapper.getByTestId("focusable");
+    console.log(el.tabIndex);
     expect(el).toHaveAttribute("tabIndex", "-1");
   });
 

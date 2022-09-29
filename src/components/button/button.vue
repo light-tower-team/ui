@@ -5,7 +5,7 @@
     class="ui-btn"
     :class="{ 'ui-focused': isFocusVisible }"
   >
-    Testing
+    Button
   </button>
 </template>
 
