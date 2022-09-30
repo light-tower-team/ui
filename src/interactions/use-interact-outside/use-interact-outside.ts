@@ -43,23 +43,25 @@ export function useInteractOutside<T extends HTMLElement = HTMLElement>(
     if (isDisabled) return;
 
     const onInteractStart = (e: Event) => {
-      if (!isValidEvent(e, elementRef) || !onInteractOutside) return;
+      if (!isValidEvent(e, elementRef)) return;
 
-      onInteractOutsideStart?.(e);
+      e.stopPropagation();
+      e.preventDefault();
 
       isPointerDown.value = true;
+
+      onInteractOutsideStart?.(e);
     };
 
     const onInteractEnd = (e: Event) => {
-      if (
-        !isPointerDown.value ||
-        !onInteractOutside ||
-        !isValidEvent(e, elementRef)
-      )
-        return;
+      if (!isPointerDown.value || !isValidEvent(e, elementRef)) return;
+
+      e.stopPropagation();
+      e.preventDefault();
 
       isPointerDown.value = false;
-      onInteractOutside(e);
+
+      onInteractOutside?.(e);
     };
 
     if (isPointerEventAvailable()) {
