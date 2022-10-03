@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="hoverProps" data-testid="root">
+  <div v-props="hoverProps" data-testid="root">
     test{{ isHovered ? "-hovered" : "" }}
     <div data-testid="inner" />
   </div>

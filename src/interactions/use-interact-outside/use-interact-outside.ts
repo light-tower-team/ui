@@ -1,49 +1,43 @@
-import { onMounted, ref, Ref } from "vue";
+import { ref, Ref, watchEffect } from "vue";
 import { isPointerEventAvailable } from "~/utils/is-pointer-event-available";
 import { useListeners } from "~/utils/use-listeners";
+import { isValidEvent } from "./helpers/is-valid-event";
 
-export interface UseInteractOutsideProps {
-  /** Whether the interact outside events should be disabled. */
-  isDisabled?: boolean;
+export interface UseInteractOutsideProps<T extends HTMLElement = HTMLElement> {
+  /**
+   *  The ref for the overlay element.
+   */
+  overlayRef: Ref<T | null>;
+
+  /**   Whether the interact outside events should be disabled. */
+  isDisabled?: Ref<boolean>;
 
   onInteractOutside?: (e: Event) => void;
   onInteractOutsideStart?: (e: Event) => void;
-}
-
-function isValidEvent<T extends HTMLElement = HTMLElement>(
-  e: Event,
-  elementRef: Ref<T | null>
-) {
-  if ((e as PointerEvent)?.button > 0) return false;
-
-  const target = e.target as Element | undefined;
-  const ownerDocument = target?.ownerDocument;
-
-  // if the event target is no longer in the document
-  if (!target || !ownerDocument?.documentElement.contains(target)) return false;
-
-  return elementRef.value && !elementRef.value.contains(target);
 }
 
 /**
  * Detect if a click event happened outside of an element. It listens for clicks that occur somewhere in the
  */
 export function useInteractOutside<T extends HTMLElement = HTMLElement>(
-  props: UseInteractOutsideProps = {},
-  elementRef: Ref<T | null>
+  props: UseInteractOutsideProps<T>
 ): void {
-  const { isDisabled, onInteractOutside, onInteractOutsideStart } = props;
+  const { overlayRef, isDisabled, onInteractOutside, onInteractOutsideStart } =
+    props;
 
   const isPointerDown = ref(false);
   const ignoreEmulatedMouseEvents = ref(false);
 
-  const { addListener } = useListeners();
+  const { addListener, removeAllListeners } = useListeners();
 
-  onMounted(() => {
-    if (isDisabled) return;
+  watchEffect(() => {
+    if (isDisabled?.value) {
+      removeAllListeners();
+      return;
+    }
 
     const onInteractStart = (e: Event) => {
-      if (!isValidEvent(e, elementRef)) return;
+      if (!isValidEvent(e, overlayRef)) return;
 
       e.stopPropagation();
       e.preventDefault();
@@ -54,7 +48,7 @@ export function useInteractOutside<T extends HTMLElement = HTMLElement>(
     };
 
     const onInteractEnd = (e: Event) => {
-      if (!isPointerDown.value || !isValidEvent(e, elementRef)) return;
+      if (!isPointerDown.value || !isValidEvent(e, overlayRef)) return;
 
       e.stopPropagation();
       e.preventDefault();

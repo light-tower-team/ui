@@ -1,9 +1,10 @@
 import { describe, expect, it, test, vi } from "vitest";
-import { render, fireEvent, waitFor } from "@testing-library/vue";
+import { waitFor } from "@testing-library/vue";
 import FocusableElement from "./fixtures/focusable-element.vue";
 import FocusableButton from "./fixtures/focusable-button.vue";
 import StopPropagationWrapper from "./fixtures/stop-propagation-wrapper.vue";
 import { SyntheticFocusEvent } from "../events";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 
 interface ShouldFocusEvent {
   type: string;

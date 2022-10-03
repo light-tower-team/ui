@@ -1,5 +1,5 @@
 <template>
-  <button v-bind="focusProps" :disabled="isDisabled" data-testid="root">
+  <button v-props="focusProps" :disabled="isDisabled" data-testid="root">
     Button
   </button>
 </template>

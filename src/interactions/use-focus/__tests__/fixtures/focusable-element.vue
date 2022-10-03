@@ -1,5 +1,5 @@
 <template>
-  <div tabindex="-1" v-bind="focusProps" data-testid="root">
+  <div v-props="focusProps" tabindex="-1" data-testid="root">
     <div tabindex="-1" data-testid="child"></div>
   </div>
 </template>

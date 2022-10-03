@@ -1,7 +1,6 @@
-import { render } from "@testing-library/vue";
 import { describe, it, vi } from "vitest";
 import { pointerEvent } from "~/interactions/use-hover/__tests__/helpers/pointer-event";
-import { fireEvent } from "~/utils/testing";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 import { installPointerEvent } from "~/utils/__tests__/events";
 import Example from "./fixtures/example.vue";
 import ExampleWithPortal from "./fixtures/example-with-portal.vue";

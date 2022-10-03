@@ -1,8 +1,6 @@
-import { render } from "@testing-library/vue";
 import { describe } from "vitest";
-import { e } from "vitest/dist/index-6e18a03a";
 import { pointerEvent } from "~/interactions/use-hover/__tests__/helpers/pointer-event";
-import { fireEvent } from "~/utils/testing";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 import { installPointerEvent } from "~/utils/__tests__/events";
 import { PressEvent } from "../helpers/create-press-event";
 import PressableButton from "./fixtures/pressable-button.vue";

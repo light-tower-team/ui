@@ -2,6 +2,7 @@ export interface UseGlobalListenersResult {
   addGlobalListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
     type: K,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     listener: (this: Document, ev: DocumentEventMap[K]) => any,
     options?: boolean | AddEventListenerOptions
   ): void;
@@ -14,6 +15,7 @@ export interface UseGlobalListenersResult {
   removeGlobalListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
     type: K,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     listener: (this: Document, ev: DocumentEventMap[K]) => any,
     options?: boolean | EventListenerOptions
   ): void;

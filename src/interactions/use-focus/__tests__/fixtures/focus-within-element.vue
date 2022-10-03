@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="focusWithinProps" tabindex="-1" data-testid="focusable">
+  <div v-props="focusWithinProps" tabindex="-1" data-testid="focusable">
     <slot />
   </div>
 </template>

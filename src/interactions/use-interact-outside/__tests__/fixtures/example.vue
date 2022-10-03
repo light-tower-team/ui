@@ -1,9 +1,9 @@
 <template>
-  <div ref="elementRef" data-testid="test"></div>
+  <div ref="overlayRef" data-testid="test"></div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useInteractOutside } from "../../use-interact-outside";
 
 const props = defineProps<{
@@ -12,7 +12,9 @@ const props = defineProps<{
   onInteractOutsideStart?: (e: Event) => void;
 }>();
 
-const elementRef = ref<HTMLDivElement | null>(null);
+const isDisabled = computed(() => Boolean(props.isDisabled));
 
-useInteractOutside(props, elementRef);
+const overlayRef = ref<HTMLDivElement | null>(null);
+
+useInteractOutside({ ...props, overlayRef, isDisabled });
 </script>

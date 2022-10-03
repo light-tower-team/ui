@@ -1,7 +1,7 @@
-import { HTMLAttributes, onUnmounted, Ref, ref, toRef } from "vue";
+import { onUnmounted, Ref, ref, toRef } from "vue";
 import { PointerType } from "~/shared";
+import { HTMLAttributes } from "~/shared/dom";
 import { isPointerEventAvailable } from "~/utils/is-pointer-event-available";
-import { setProp } from "~/utils/set-prop";
 import { useListeners } from "~/utils/use-listeners";
 import {
   createPressEvent,
@@ -234,7 +234,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       detach();
     };
 
-    setProp(pressProps, "onPointerDown", (e: PointerEvent) => {
+    pressProps.onPointerDown = (e: PointerEvent) => {
       // Only handle left clicks
       if (e.button !== 0) return;
 
@@ -256,9 +256,9 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       addListener(document, "pointermove", onPointerMove, false);
       addListener(document, "pointerup", onPointerUp, false);
       addListener(document, "pointercancel", onPointerCancel, false);
-    });
+    };
 
-    setProp(pressProps, "onPointerUp", (e: PointerEvent) => {
+    pressProps.onPointerUp = (e: PointerEvent) => {
       // Only handle left clicks
       if (e.button !== 0 || !isTargetContainsPoint(cache.currentTarget, e))
         return;
@@ -270,7 +270,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
           e.pointerType as PointerType
         )
       );
-    });
+    };
   } else {
     const onMouseUp = (e: MouseEvent) => {
       // Only handle left clicks
@@ -288,7 +288,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       detach();
     };
 
-    setProp(pressProps, "onMouseDown", (e: MouseEvent) => {
+    pressProps.onMouseDown = (e: MouseEvent) => {
       // Only handle left clicks
       if (e.button !== 0) return;
 
@@ -302,25 +302,25 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       triggerPressStart(createPressEvent<T>(e, cache.currentTarget, "mouse"));
 
       addListener(document, "mouseup", onMouseUp, false);
-    });
+    };
 
-    setProp(pressProps, "onMouseUp", (e: MouseEvent) => {
+    pressProps.onMouseUp = (e: MouseEvent) => {
       // Only handle left clicks
       if (e.button !== 0 || !isTargetContainsPoint(cache.currentTarget, e))
         return;
 
       triggerPressUp(createPressEvent<T>(e, cache.currentTarget, "mouse"));
-    });
+    };
 
-    setProp(pressProps, "onMouseEnter", (e: MouseEvent) => {
+    pressProps.onMouseEnter = (e: MouseEvent) => {
       e.stopPropagation();
 
       if (!cache.isPressed || ignoreEmulatedMouseEvents) return;
 
       triggerPressStart(createPressEvent<T>(e, cache.currentTarget, "mouse"));
-    });
+    };
 
-    setProp(pressProps, "onMouseLeave", (e: MouseEvent) => {
+    pressProps.onMouseLeave = (e: MouseEvent) => {
       e.stopPropagation();
 
       if (!cache.isPressed || ignoreEmulatedMouseEvents) return;
@@ -333,7 +333,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       if (shouldCancelOnPointerExit) {
         detach();
       }
-    });
+    };
 
     const onTouchMove = (e: TouchEvent) => {
       const touch = getTouchById(e, cache.currentId);
@@ -380,7 +380,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       detach();
     };
 
-    setProp(pressProps, "onTouchStart", (e: TouchEvent) => {
+    pressProps.onTouchStart = (e: TouchEvent) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -395,7 +395,7 @@ export function usePress<T extends HTMLElement = HTMLElement>(
       addListener(document, "touchmove", onTouchMove, false);
       addListener(document, "touchend", onTouchEnd, false);
       addListener(document, "touchcancel", onTouchCancel, false);
-    });
+    };
   }
 
   onUnmounted(() => {

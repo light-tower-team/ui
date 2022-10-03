@@ -1,11 +1,11 @@
 <template>
   <button
-    v-bind="props"
-    ref="el"
+    ref="buttonRef"
+    v-props="buttonProps"
     class="ui-btn"
     :class="{ 'ui-focused': isFocusVisible }"
   >
-    Button
+    <slot />
   </button>
 </template>
 
@@ -15,17 +15,16 @@ import { useButton } from "~/hooks/button";
 import { useFocusRign } from "~/hooks/focus";
 import { mergeProps } from "~/utils/merge-props";
 
-const el = ref<null | HTMLElement>(null);
+const providedProps = defineProps<{
+  onPress?: () => void;
+}>();
 
-const { buttonProps } = useButton({}, el);
-const { focusProps, isFocusVisible } = useFocusRign(
-  {
-    autoFocus: true,
-  },
-  el
-);
+const buttonRef = ref<null | HTMLElement>(null);
 
-const props = mergeProps(buttonProps, focusProps);
+let { buttonProps } = useButton(providedProps, buttonRef);
+const { focusProps, isFocusVisible } = useFocusRign({}, buttonRef);
+
+buttonProps = mergeProps(buttonProps, focusProps);
 </script>
 
 <style lang="scss" src="./button.scss" />

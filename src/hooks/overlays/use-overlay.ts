@@ -3,14 +3,17 @@ import { useFocusWithin } from "~/interactions/use-focus";
 import { useInteractOutside } from "~/interactions/use-interact-outside";
 import { HTMLAttributes } from "~/shared/dom";
 import { mergeProps } from "~/utils/merge-props";
-import { setProp } from "~/utils/set-prop";
 
-export interface UseOverlayProps {
+export interface UseOverlayProps<T extends HTMLElement = HTMLElement> {
   /**
-   *  Whether the overlay is currently open.
-   *  @default false
+   *  Whether the overlay is disabled.
    */
-  isOpen?: boolean;
+  isDisabled?: Ref<boolean>;
+
+  /**
+   *  The ref for the overlay element.
+   */
+  overlayRef: Ref<T | null>;
 
   /**
    *  Whether to close the overlay when the user interacts outside it.
@@ -47,10 +50,11 @@ export interface UseOverlayResult {
  *  or optionally, on blur. Only the top-most overlay will close at once.
  */
 export function useOverlay<T extends HTMLElement = HTMLElement>(
-  props: UseOverlayProps = {},
-  overlayRef: Ref<T | null>
+  props: UseOverlayProps<T>
 ): UseOverlayResult {
   const {
+    overlayRef,
+    isDisabled,
     isDismissable,
     shouldCloseOnBlur,
     isKeyboardDismissDisabled,
@@ -58,12 +62,11 @@ export function useOverlay<T extends HTMLElement = HTMLElement>(
   } = props;
 
   // Handle clicking outside the overlay to close it
-  useInteractOutside(
-    {
-      onInteractOutside: isDismissable ? onClose : undefined,
-    },
-    overlayRef
-  );
+  useInteractOutside({
+    isDisabled,
+    overlayRef,
+    onInteractOutside: isDismissable ? onClose : undefined,
+  });
 
   const { focusWithinProps } = useFocusWithin({
     isDisabled: !shouldCloseOnBlur,
@@ -80,9 +83,9 @@ export function useOverlay<T extends HTMLElement = HTMLElement>(
     onClose?.();
   };
 
-  const keyboardProps: HTMLAttributes = {};
-
-  setProp(keyboardProps, "onKeyDown", onKeyDown);
+  const keyboardProps: HTMLAttributes = {
+    onKeyDown,
+  };
 
   const onPointerDownUnderlay = (e: PointerEvent) => {
     // fixes a firefox issue that starts text selection https://bugzilla.mozilla.org/show_bug.cgi?id=1675846

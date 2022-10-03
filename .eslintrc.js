@@ -11,6 +11,8 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "vue/multi-word-component-names": "off",
+    "no-console": ["error", { allow: ["error", "warn"] }],
   },
 };

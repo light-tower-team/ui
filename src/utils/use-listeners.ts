@@ -4,6 +4,7 @@ export interface UseListenersResult {
   addListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
     type: K,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     listener: (this: Document, ev: DocumentEventMap[K]) => any,
     options?: boolean | AddEventListenerOptions
   ): void;
@@ -16,6 +17,7 @@ export interface UseListenersResult {
   removeListener<K extends keyof DocumentEventMap>(
     el: EventTarget,
     type: K,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     listener: (this: Document, ev: DocumentEventMap[K]) => any,
     options?: boolean | EventListenerOptions
   ): void;

@@ -1,7 +1,7 @@
-import { onUnmounted, Ref, ref, toRef, watchEffect } from "vue";
+import { Ref, ref, toRef, watchEffect } from "vue";
 import { PointerType } from "~/shared";
+import { HTMLAttributes } from "~/shared/dom";
 import { isPointerEventAvailable } from "~/utils/is-pointer-event-available";
-import { setProp } from "~/utils/set-prop";
 
 export type HoverType = "hoverstart" | "hoverend" | "hoverchange";
 
@@ -28,7 +28,7 @@ export interface UseHoverProps {
 
 export interface UseHoverResult {
   isHovered: Ref<boolean>;
-  hoverProps: HoverProps;
+  hoverProps: HTMLAttributes;
 }
 
 export function useHover(props: UseHoverProps = {}): UseHoverResult {
@@ -53,21 +53,19 @@ export function useHover(props: UseHoverProps = {}): UseHoverResult {
     isHovered.value = true;
     state.target = target ?? undefined;
 
-    onHoverStart &&
-      onHoverStart({
-        type: "hoverstart",
-        target,
-        pointerType: pointerType as PointerType,
-        isHovering: true,
-      });
+    onHoverStart?.({
+      type: "hoverstart",
+      target,
+      pointerType: pointerType as PointerType,
+      isHovering: true,
+    });
 
-    onHoverChange &&
-      onHoverChange({
-        type: "hoverchange",
-        target,
-        pointerType: pointerType as PointerType,
-        isHovering: true,
-      });
+    onHoverChange?.({
+      type: "hoverchange",
+      target,
+      pointerType: pointerType as PointerType,
+      isHovering: true,
+    });
   };
 
   const onHoverEndHandle = (
@@ -81,54 +79,50 @@ export function useHover(props: UseHoverProps = {}): UseHoverResult {
 
     isHovered.value = false;
 
-    onHoverEnd &&
-      onHoverEnd({
-        type: "hoverend",
-        target,
-        pointerType: pointerType as PointerType,
-        isHovering: false,
-      });
-
-    onHoverChange &&
-      onHoverChange({
-        type: "hoverchange",
-        target,
-        pointerType: pointerType as PointerType,
-        isHovering: false,
-      });
-  };
-
-  const hoverProps: HoverProps = {};
-
-  if (isPointerEventAvailable()) {
-    setProp(hoverProps, "onPointerEnter", ({ target, pointerType }) => {
-      onHoverStartHandle(target, pointerType as PointerType);
+    onHoverEnd?.({
+      type: "hoverend",
+      target,
+      pointerType: pointerType as PointerType,
+      isHovering: false,
     });
 
-    setProp(hoverProps, "onPointerLeave", ({ target, pointerType }) => {
+    onHoverChange?.({
+      type: "hoverchange",
+      target,
+      pointerType: pointerType as PointerType,
+      isHovering: false,
+    });
+  };
+
+  const hoverProps: HTMLAttributes = {};
+
+  if (isPointerEventAvailable()) {
+    hoverProps.onPointerEnter = ({ target, pointerType }) => {
+      onHoverStartHandle(target, pointerType as PointerType);
+    };
+
+    hoverProps.onPointerLeave = ({ target, pointerType }) => {
       if (isDisabled.value) return;
 
       onHoverEndHandle(target, pointerType as PointerType);
-    });
+    };
   } else {
-    setProp(hoverProps, "onMouseEnter", ({ target }) => {
+    hoverProps.onMouseEnter = ({ target }) => {
       onHoverStartHandle(target, "mouse");
-    });
+    };
 
-    setProp(hoverProps, "onMouseLeave", ({ target }) => {
+    hoverProps.onMouseLeave = ({ target }) => {
       if (isDisabled.value) return;
 
       onHoverEndHandle(target, "mouse");
-    });
+    };
   }
 
-  const stopIsDisabledWatch = watchEffect(() => {
-    if (isDisabled.value && state.target && state.pointerType) {
-      onHoverEndHandle(state.target, state.pointerType);
-    }
-  });
+  watchEffect(() => {
+    if (!isDisabled.value || !state.target || !state.pointerType) return;
 
-  onUnmounted(() => stopIsDisabledWatch());
+    onHoverEndHandle(state.target, state.pointerType);
+  });
 
   return {
     isHovered,

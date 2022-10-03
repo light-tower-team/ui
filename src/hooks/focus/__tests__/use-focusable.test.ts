@@ -1,10 +1,7 @@
-import matchers from "@testing-library/jest-dom/matchers";
 import { render } from "@testing-library/vue";
 import { describe, expect, it } from "vitest";
 import { nextTick } from "vue";
 import FocusableElement from "./fixtures/focusable-element.vue";
-
-expect.extend(matchers);
 
 describe("useFocusable", () => {
   it("should render component with auto focus", async () => {
@@ -27,7 +24,6 @@ describe("useFocusable", () => {
       },
     });
     const el = wrapper.getByTestId("focusable");
-    console.log(el.tabIndex);
     expect(el).toHaveAttribute("tabIndex", "-1");
   });
 

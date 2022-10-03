@@ -1,3 +1,4 @@
+import { Ref, StyleValue } from "vue";
 import { AriaAttributes, AriaRole } from "./aria";
 import { DOMEvents } from "./events";
 
@@ -10,23 +11,26 @@ type Booleanish = boolean | "true" | "false";
 
 export interface HTMLAttributes extends AriaAttributes, DOMEvents {
   // Standard HTML Attributes
-  accessKey?: string | undefined;
-  contentEditable?: Booleanish | "inherit" | undefined;
-  contextMenu?: string | undefined;
-  dir?: string | undefined;
-  draggable?: Booleanish | undefined;
-  hidden?: boolean | undefined;
-  id?: string | undefined;
-  lang?: string | undefined;
-  placeholder?: string | undefined;
-  slot?: string | undefined;
-  spellCheck?: Booleanish | undefined;
-  tabIndex?: number | undefined;
-  title?: string | undefined;
-  translate?: "yes" | "no" | undefined;
+  accessKey?: string;
+  contentEditable?: Booleanish | "inherit";
+  contextMenu?: string;
+  dir?: string;
+  draggable?: Booleanish;
+  hidden?: boolean;
+  id?: string;
+  lang?: string;
+  placeholder?: string;
+  slot?: string;
+  spellCheck?: Booleanish;
+  tabIndex?: number;
+  title?: string;
+  translate?: "yes" | "no";
+
+  // class or className
+  style?: StyleValue | Ref<StyleValue>;
 
   // WAI-ARIA
-  role?: AriaRole | undefined;
+  role?: AriaRole;
 
   // Living Standard
   /**
@@ -41,6 +45,5 @@ export interface HTMLAttributes extends AriaAttributes, DOMEvents {
     | "email"
     | "numeric"
     | "decimal"
-    | "search"
-    | undefined;
+    | "search";
 }

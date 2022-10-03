@@ -1,5 +1,5 @@
-import UiButton from "./button.vue";
+import UiTextField from "./textfield.vue";
 
-export { UiButton };
+export { UiTextField };
 
-export default UiButton;
+export default UiTextField;

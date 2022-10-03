@@ -1,6 +1,6 @@
-import { render, waitFor } from "@testing-library/vue";
+import { waitFor } from "@testing-library/vue";
 import { describe, it, vi } from "vitest";
-import { fireEvent } from "~/utils/testing";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 import { useFocusWithin } from "../use-focus-within";
 import FocusableElement from "./fixtures/focus-within-element.vue";
 
@@ -199,7 +199,7 @@ describe("useFocusWithin", () => {
           return useFocusWithin(props);
         },
         template: `
-          <div v-bind="focusWithinProps">
+          <div v-props="focusWithinProps">
             <button :disabled="disabled" data-testid="btn">Button</button>
           </div>
         `,

@@ -1,6 +1,5 @@
-import { render } from "@testing-library/vue";
 import { afterEach, describe, expect, it } from "vitest";
-import { fireEvent } from "~/utils/testing";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 import { installPointerEvent } from "~/utils/__tests__/events";
 import { HoverEvent } from "..";
 import HoverableElement from "./fixtures/hoverable-element.vue";

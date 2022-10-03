@@ -1,12 +1,8 @@
-import matchers from "@testing-library/jest-dom/matchers";
-import { render } from "@testing-library/vue";
 import { describe, vi } from "vitest";
 import { nextTick, ref } from "vue";
-import { fireEvent } from "~/utils/testing";
+import { fireEvent, render } from "~/utils/__tests__/lib";
 import { installPointerEvent } from "~/utils/__tests__/events";
 import Overlay from "./fixtures/overlay.vue";
-
-expect.extend(matchers);
 
 describe("useOverlay", () => {
   describe.each([
@@ -57,7 +53,6 @@ describe("useOverlay", () => {
         `,
         setup() {
           const inputRef = ref<HTMLInputElement | null>(null);
-
           return {
             inputRef,
           };

@@ -1,6 +1,6 @@
 <template>
-  <div v-bind="underlayProps">
-    <div v-bind="overlayProps" ref="overlayRef" data-testid="overlay">
+  <div v-props="underlayProps">
+    <div ref="overlayRef" v-props="overlayProps" data-testid="overlay">
       <slot />
     </div>
   </div>
@@ -11,12 +11,14 @@ import { ref } from "vue";
 import { useOverlay } from "../../use-overlay";
 
 const props = defineProps<{
-  isOpen?: boolean;
   isDismissable?: boolean;
   onClose?: () => void;
 }>();
 
 const overlayRef = ref<HTMLElement | null>(null);
 
-const { overlayProps, underlayProps } = useOverlay(props, overlayRef);
+const { overlayProps, underlayProps } = useOverlay({
+  ...props,
+  overlayRef,
+});
 </script>

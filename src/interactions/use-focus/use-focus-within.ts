@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { setProp } from "~/utils/set-prop";
+import { HTMLAttributes } from "~/shared/dom";
 import { SyntheticFocusWithinEvent } from "./events";
 import { useSyntheticBlurEvent } from "./use-synthetic-blur-event";
 
@@ -10,13 +10,8 @@ export interface UseFocusWithinProps {
   onFocusWithinChange?: (e: SyntheticFocusWithinEvent) => void;
 }
 
-export interface FocusWithinProps {
-  onFocus?: (e: FocusEvent) => void;
-  onBlur?: (e: FocusEvent) => void;
-}
-
 export interface UseFocusWithinResult {
-  focusWithinProps: FocusWithinProps;
+  focusWithinProps: HTMLAttributes;
 }
 
 export function useFocusWithin<T extends HTMLElement = HTMLElement>(
@@ -35,17 +30,13 @@ export function useFocusWithin<T extends HTMLElement = HTMLElement>(
 
     isFocusWithin.value = false;
 
-    if (onBlurWithin) {
-      onBlurWithin(
-        new SyntheticFocusWithinEvent("blur", e, { isFocused: false })
-      );
-    }
+    onBlurWithin?.(
+      new SyntheticFocusWithinEvent("blur", e, { isFocused: false })
+    );
 
-    if (onFocusWithinChange) {
-      onFocusWithinChange(
-        new SyntheticFocusWithinEvent("focuschange", e, { isFocused: false })
-      );
-    }
+    onFocusWithinChange?.(
+      new SyntheticFocusWithinEvent("focuschange", e, { isFocused: false })
+    );
   };
 
   const onSyntheticFocus = useSyntheticBlurEvent(onBlur);
@@ -55,26 +46,22 @@ export function useFocusWithin<T extends HTMLElement = HTMLElement>(
 
     isFocusWithin.value = true;
 
-    if (onFocusWithin) {
-      onFocusWithin(
-        new SyntheticFocusWithinEvent("focus", e, { isFocused: true })
-      );
-    }
+    onFocusWithin?.(
+      new SyntheticFocusWithinEvent("focus", e, { isFocused: true })
+    );
 
-    if (onFocusWithinChange) {
-      onFocusWithinChange(
-        new SyntheticFocusWithinEvent("focuschange", e, { isFocused: true })
-      );
-    }
+    onFocusWithinChange?.(
+      new SyntheticFocusWithinEvent("focuschange", e, { isFocused: true })
+    );
 
     onSyntheticFocus(e);
   };
 
-  const focusWithinProps: FocusWithinProps = {};
+  const focusWithinProps: HTMLAttributes = {};
 
   if (!isDisabled) {
-    setProp(focusWithinProps, "onFocusIn", onFocus);
-    setProp(focusWithinProps, "onFocusOut", onBlur);
+    focusWithinProps.onFocusIn = onFocus;
+    focusWithinProps.onFocusOut = onBlur;
   }
 
   return {

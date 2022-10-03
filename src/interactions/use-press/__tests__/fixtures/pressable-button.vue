@@ -1,5 +1,5 @@
 <template>
-  <button v-bind="pressProps" data-testid="pressable"></button>
+  <button v-props="pressProps" data-testid="pressable"></button>
 </template>
 
 <script setup lang="ts">
