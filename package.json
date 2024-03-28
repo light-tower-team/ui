@@ -1,6 +1,6 @@
 {
   "name": "@light-tower-team/ui",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Light Tower UI component library",
   "type": "module",
   "files": [
