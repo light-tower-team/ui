@@ -17,7 +17,7 @@
   },
   "scripts": {
     "auto-fix": "lefthook run auto-fix",
-    "build": "rm -rf ./dist && vue-tsc && vite build",
+    "build": "rm -rf ./dist && vue-tsc && vite build && vue-tsc -p tsconfig.typegen.json",
     "ts_check": "tsc --noEmit",
     "lint": "eslint ./src --fix",
     "lint:check": "eslint ./src",
@@ -30,7 +30,7 @@
     "test:run:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --pool threads --poolOptions.threads.singleThread",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build -o dist/storybook"
   },
   "sideEffects": false,
   "engines": {
@@ -85,7 +85,6 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3",
     "vite": "^5.2.6",
-    "vite-plugin-dts": "^3.8.1",
     "vitest": "^1.4.0",
     "vue": "^3.4.21",
     "vue-tsc": "^2.0.7"

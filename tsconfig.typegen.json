@@ -1,0 +1,10 @@
+{
+  "extends": ["./tsconfig.json"],
+  "exclude": ["**/__tests__/**", "**/*.spec.*", "**/*.stories.*"],
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist/types"
+  }
+}
