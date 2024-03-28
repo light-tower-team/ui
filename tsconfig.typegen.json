@@ -1,5 +1,6 @@
 {
   "extends": ["./tsconfig.json"],
+  "include": ["src/**/*.ts", "src/**/*.vue"],
   "exclude": ["**/__tests__/**", "**/*.spec.*", "**/*.stories.*"],
   "compilerOptions": {
     "noEmit": false,
