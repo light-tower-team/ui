@@ -1,0 +1,26 @@
+pre-push:
+  parallel: true
+  commands:
+    type-check:
+      tags: type check
+      glob: "*.{ts,tsx}"
+      run: npx tsc --noEmit
+    lint:
+      tags: code-style
+      files: git diff --name-only --diff-filter=d origin/master...HEAD
+      glob: "*.{ts,tsx}"
+      run: npx eslint --report-unused-disable-directives --max-warnings 0 {files}
+    format:
+      tags: code-style
+      files: git diff --name-only --diff-filter=d origin/master...HEAD
+      glob: "*.{ts,tsx}"
+      run: npx prettier --check {files}
+
+auto-fix:
+  parallel: true
+  commands:
+    code-style:
+      tags: code-style
+      files: git diff --name-only --diff-filter=d origin/master...HEAD
+      glob: "*.{ts,tsx}"
+      run: npx eslint --fix {files} && npx prettier --write --list-different {files}
