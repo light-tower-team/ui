@@ -1,13 +1,4 @@
-import {
-  Component,
-  MaybeRef,
-  computed,
-  reactive,
-  readonly,
-  ref,
-  toRef,
-  toValue,
-} from "vue";
+import { Component, MaybeRef, computed, reactive, readonly, ref, toRef, toValue } from "vue";
 import { contains } from "../../utils/contains";
 import { BUTTON_TYPES } from "./constants";
 
@@ -66,15 +57,12 @@ export function useButton(params: UseButtonParams = {}): UseButtonReturnValue {
     const type = toValue(params.type);
 
     const isButton = is.value === "button";
-    const isFormButton =
-      is.value === "input" && contains(["button", "submit", "reset"], type);
+    const isFormButton = is.value === "input" && contains(["button", "submit", "reset"], type);
 
     return isButton || isFormButton;
   });
 
-  const pressed = computed<true | undefined>(() =>
-    !isNativeButton.value && active.value ? true : undefined,
-  );
+  const pressed = computed<true | undefined>(() => (!isNativeButton.value && active.value ? true : undefined));
 
   const isDisabled = computed<boolean>(() => {
     const disabled = toValue(params.disabled);
@@ -84,15 +72,11 @@ export function useButton(params: UseButtonParams = {}): UseButtonReturnValue {
   });
 
   const disabled = computed<true | undefined>(() => {
-    return isDisabled.value && isNativeButton.value && !visuallyDisabled.value
-      ? true
-      : undefined;
+    return isDisabled.value && isNativeButton.value && !visuallyDisabled.value ? true : undefined;
   });
 
   const ariaDisabled = computed<true | undefined>(() => {
-    return isDisabled.value &&
-      ((isNativeButton.value && visuallyDisabled.value) ||
-        !isNativeButton.value)
+    return isDisabled.value && ((isNativeButton.value && visuallyDisabled.value) || !isNativeButton.value)
       ? true
       : undefined;
   });

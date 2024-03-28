@@ -1,4 +1,5 @@
 import { normalizeClass } from "vue";
+import { RING_CLASS } from "../../../utils/constants";
 import {
   BUTTON_CLASS,
   BUTTON_COLORS,
@@ -15,7 +16,6 @@ import {
   LOADING_BUTTON_CLASS,
   ROUNDED_BUTTON_CLASS,
 } from "../constants";
-import { RING_CLASS } from "../../../utils/constants";
 
 interface BuildButtonClassesParams {
   size?: BUTTON_SIZES;

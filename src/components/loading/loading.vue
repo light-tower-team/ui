@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { PropType, computed } from "vue";
 import { contains } from "../../utils/contains";
-import {
-  DEFAULT_LOADING_LABEL,
-  LOADING_SIZES,
-  LOADING_SIZES_CLASSES,
-} from "./constants";
+import { DEFAULT_LOADING_LABEL, LOADING_SIZES, LOADING_SIZES_CLASSES } from "./constants";
 
 const props = defineProps({
   size: {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Icon from "./icon.vue";
 import { ICON_NAMES, ICON_SIZES } from "./constants";
+import Icon from "./icon.vue";
 
 const meta: Meta<typeof Icon> = {
   component: Icon,

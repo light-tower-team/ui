@@ -1,34 +1,23 @@
 import { ComponentMountingOptions, mount } from "@vue/test-utils";
-import Button from "./button.vue";
-import {
-  BUTTON_VARIANT_CLASSES,
-  BUTTON_VARIANTS,
-  BUTTON_COLORS,
-  BUTTON_SIZES,
-} from "./constants";
-import { buildButtonClasses } from "./utils/build_button_classes";
 import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
+import Button from "./button.vue";
+import { BUTTON_VARIANT_CLASSES, BUTTON_VARIANTS, BUTTON_COLORS, BUTTON_SIZES } from "./constants";
+import { buildButtonClasses } from "./utils/build_button_classes";
 
-const BUTTON_VARIANTS_AND_COLORS = Object.entries(
-  BUTTON_VARIANT_CLASSES,
-).reduce<Array<{ variant: BUTTON_VARIANTS; color: BUTTON_COLORS }>>(
-  (acc, [variant, colors]) => {
-    Object.keys(colors).forEach((color) => {
-      acc.push({
-        variant: variant as BUTTON_VARIANTS,
-        color: color as BUTTON_COLORS,
-      });
+const BUTTON_VARIANTS_AND_COLORS = Object.entries(BUTTON_VARIANT_CLASSES).reduce<
+  Array<{ variant: BUTTON_VARIANTS; color: BUTTON_COLORS }>
+>((acc, [variant, colors]) => {
+  Object.keys(colors).forEach((color) => {
+    acc.push({
+      variant: variant as BUTTON_VARIANTS,
+      color: color as BUTTON_COLORS,
     });
+  });
 
-    return acc;
-  },
-  [],
-);
+  return acc;
+}, []);
 
-function mountButton(
-  options?: ComponentMountingOptions<typeof Button>,
-  tag = "button",
-) {
+function mountButton(options?: ComponentMountingOptions<typeof Button>, tag = "button") {
   const wrapper = mount(Button, options);
 
   const btn = wrapper.get(tag);
@@ -70,26 +59,20 @@ describe("button", () => {
     ({ variant, color }) => {
       const { btn } = mountButton({ props: { variant, color } });
 
-      expect(btn.classes().join(" ")).toEqual(
-        buildButtonClasses({ variant, color }),
-      );
+      expect(btn.classes().join(" ")).toEqual(buildButtonClasses({ variant, color }));
     },
   );
 
   it("should apply a 'fullWidth' class", () => {
     const { btn } = mountButton({ props: { fullWidth: true } });
 
-    expect(btn.classes().join(" ")).toEqual(
-      buildButtonClasses({ fullWidth: true }),
-    );
+    expect(btn.classes().join(" ")).toEqual(buildButtonClasses({ fullWidth: true }));
   });
 
   it("should apply a 'rounded' class", () => {
     const { btn } = mountButton({ props: { rounded: true } });
 
-    expect(btn.classes().join(" ")).toEqual(
-      buildButtonClasses({ rounded: true }),
-    );
+    expect(btn.classes().join(" ")).toEqual(buildButtonClasses({ rounded: true }));
   });
 
   it("has attribute 'disabled' when 'disabled' is set", () => {
@@ -156,10 +139,7 @@ describe("button", () => {
     });
 
     it("has attribute 'disabled' when 'disabled' is set", () => {
-      const { btn } = mountButton(
-        { props: { is: "span", disabled: true } },
-        "span",
-      );
+      const { btn } = mountButton({ props: { is: "span", disabled: true } }, "span");
 
       expect(btn.classes().join(" ")).toEqual(buildButtonClasses());
       expect(btn.attributes("type")).toBeUndefined();
@@ -211,10 +191,7 @@ describe("button", () => {
     });
 
     it("should not treat keydown.enter event as click event when disabled", () => {
-      const { btn, wrapper } = mountButton(
-        { props: { href: "#", disabled: true } },
-        "a",
-      );
+      const { btn, wrapper } = mountButton({ props: { href: "#", disabled: true } }, "a");
 
       btn.trigger("keydown", { key: "Enter" });
 
@@ -231,10 +208,7 @@ describe("button", () => {
     });
 
     it("should not treat keyup.space event as click event when disabled", () => {
-      const { btn, wrapper } = mountButton(
-        { props: { href: "#", disabled: true } },
-        "a",
-      );
+      const { btn, wrapper } = mountButton({ props: { href: "#", disabled: true } }, "a");
 
       btn.trigger("keydown", { key: " " });
       btn.trigger("keyup", { key: " " });
@@ -285,8 +259,6 @@ describe("button", () => {
 
     const btn = wrapper.get("button");
 
-    expect(btn.classes().join(" ")).toContain(
-      buildButtonClasses({ hasOnlyIcon: true }),
-    );
+    expect(btn.classes().join(" ")).toContain(buildButtonClasses({ hasOnlyIcon: true }));
   });
 });

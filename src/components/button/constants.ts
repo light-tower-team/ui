@@ -1,12 +1,7 @@
 export const BUTTON_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 export type BUTTON_SIZES = (typeof BUTTON_SIZES)[number];
 
-export const BUTTON_VARIANTS = [
-  "filled",
-  "filled-tonal",
-  "text",
-  "outlined",
-] as const;
+export const BUTTON_VARIANTS = ["filled", "filled-tonal", "text", "outlined"] as const;
 export type BUTTON_VARIANTS = (typeof BUTTON_VARIANTS)[number];
 
 export const BUTTON_COLORS = ["neutral", "primary", "danger"] as const;
@@ -28,10 +23,7 @@ export const ICON_BUTTON_SIZE_CLASSES: Record<BUTTON_SIZES, string> = {
   xl: "w-12 h-12",
 };
 
-export const BUTTON_VARIANT_CLASSES: Record<
-  BUTTON_VARIANTS,
-  Record<BUTTON_COLORS, string>
-> = {
+export const BUTTON_VARIANT_CLASSES: Record<BUTTON_VARIANTS, Record<BUTTON_COLORS, string>> = {
   filled: {
     neutral:
       "text-white border-transparent bg-gray-600 enabled:hover:text-white enabled:hover:bg-gray-700 enabled:focus:text-white enabled:focus:bg-gray-700 enabled:active:text-white enabled:active:bg-gray-800",
@@ -79,16 +71,11 @@ export const FULL_BUTTON_WIDTH_CLASS = "w-full";
 export const DEFAULT_ROUNDED_BUTTON_CLASS = "rounded";
 export const ROUNDED_BUTTON_CLASS = "rounded-full";
 
-export const DISABLED_BUTTON_CLASS =
-  "disabled:opacity-75 disabled:select-none disabled:cursor-default";
+export const DISABLED_BUTTON_CLASS = "disabled:opacity-75 disabled:select-none disabled:cursor-default";
 
 export const BUTTON_WARNINGS = {
   noLabel: "[button]: Accessible name missing. Please add aria-label.",
 } as const;
 
-export const BUTTON_TYPES = [
-  "submit",
-  "reset",
-  "button",
-] as const satisfies Array<HTMLButtonElement["type"]>;
+export const BUTTON_TYPES = ["submit", "reset", "button"] as const satisfies Array<HTMLButtonElement["type"]>;
 export type BUTTON_TYPES = (typeof BUTTON_TYPES)[number];

@@ -1,7 +1,7 @@
 import { ComponentMountingOptions, mount } from "@vue/test-utils";
-import Loading from "./loading.vue";
-import { DEFAULT_LOADING_LABEL, LOADING_SIZES } from "./constants";
 import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
+import { DEFAULT_LOADING_LABEL, LOADING_SIZES } from "./constants";
+import Loading from "./loading.vue";
 
 function mountLoading(options?: ComponentMountingOptions<typeof Loading>) {
   const wrapper = mount(Loading, options);

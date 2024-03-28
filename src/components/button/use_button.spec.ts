@@ -1,9 +1,6 @@
 import { ButtonProps, useButton } from "./use_button";
 
-const expectButtonProps = (
-  current: ButtonProps,
-  required: Partial<ButtonProps>,
-): void => {
+const expectButtonProps = (current: ButtonProps, required: Partial<ButtonProps>): void => {
   expect(current.type).toEqual(required.type);
   expect(current.disabled).toEqual(required.disabled);
   expect(current.tabIndex).toEqual(required.tabIndex);
@@ -32,33 +29,30 @@ describe("useButton", () => {
       { tag: "input", type: "button" },
       { tag: "input", type: "submit" },
       { tag: "input", type: "reset" },
-    ] as const)(
-      "disabled button with $tag tag and $type type",
-      ({ tag, type }) => {
-        it("should has disabled attr when 'disabled' is set", () => {
-          const { is, buttonProps } = useButton({
-            is: tag,
-            type,
-            disabled: true,
-          });
-
-          expect(is).toEqual(tag);
-          expectButtonProps(buttonProps, { type, disabled: true });
+    ] as const)("disabled button with $tag tag and $type type", ({ tag, type }) => {
+      it("should has disabled attr when 'disabled' is set", () => {
+        const { is, buttonProps } = useButton({
+          is: tag,
+          type,
+          disabled: true,
         });
 
-        it("should has aria-disabled='true' attr when 'disabled' and 'visuallyDisabled' are set", () => {
-          const { is, buttonProps } = useButton({
-            is: tag,
-            type,
-            disabled: true,
-            visuallyDisabled: true,
-          });
+        expect(is).toEqual(tag);
+        expectButtonProps(buttonProps, { type, disabled: true });
+      });
 
-          expect(is).toEqual(tag);
-          expectButtonProps(buttonProps, { type, ariaDisabled: true });
+      it("should has aria-disabled='true' attr when 'disabled' and 'visuallyDisabled' are set", () => {
+        const { is, buttonProps } = useButton({
+          is: tag,
+          type,
+          disabled: true,
+          visuallyDisabled: true,
         });
-      },
-    );
+
+        expect(is).toEqual(tag);
+        expectButtonProps(buttonProps, { type, ariaDisabled: true });
+      });
+    });
   });
 
   describe("non-interactive", () => {
@@ -321,7 +315,7 @@ describe("useButton", () => {
         expectButtonProps(buttonProps, {
           role: "button",
           tabIndex: 0,
-          ["data-pressed"]: true,
+          "data-pressed": true,
         });
       });
 

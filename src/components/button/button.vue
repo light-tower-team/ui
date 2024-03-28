@@ -1,28 +1,15 @@
 <script setup lang="ts">
-import {
-  toRefs,
-  PropType,
-  computed,
-  toValue,
-  useSlots,
-  watchEffect,
-} from "vue";
+import { toRefs, PropType, computed, toValue, useSlots, watchEffect } from "vue";
 import Tooltip from "../tooltip";
 import Loading from "../loading";
 import Icon from "../icon";
-import {
-  BUTTON_COLORS,
-  BUTTON_SIZES,
-  BUTTON_TYPES,
-  BUTTON_VARIANTS,
-  BUTTON_WARNINGS,
-} from "./constants";
+import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_TYPES, BUTTON_VARIANTS, BUTTON_WARNINGS } from "./constants";
 import { useButton } from "./use_button";
 
 import { contains } from "../../utils/contains";
 import { ICON_NAMES } from "../icon/constants";
 import { buildButtonClasses } from "./utils/build_button_classes";
-import { isEmpty } from "../../utils/isEmpty";
+import { isEmpty } from "../../utils/is_empty";
 
 const props = defineProps({
   is: { type: String, required: false, default: "button" },
@@ -69,9 +56,7 @@ const emits = defineEmits<{
 
 const slots = useSlots();
 
-const hasContent = computed<boolean>(
-  () => !!slots.default && !isEmpty(slots.default()),
-);
+const hasContent = computed<boolean>(() => !!slots.default && !isEmpty(slots.default()));
 
 const hasOnlyIcon = computed<boolean>(() => {
   const withoutContent = !hasContent.value;
@@ -112,18 +97,12 @@ watchEffect(
 <template>
   <Tooltip :title="title" placement="top">
     <template #default="attrs">
-      <component
-        v-bind="{ ...$attrs, ...attrs, ...buttonProps }"
-        :is="is"
-        :class="classes"
-      >
+      <component v-bind="{ ...$attrs, ...attrs, ...buttonProps }" :is="is" :class="classes">
         <slot v-if="loading" name="loading">
           <Loading />
         </slot>
         <Icon v-if="leadingIcon" :name="leadingIcon" />
-        <span class="text-ellipsis overflow-hidden whitespace-nowrap"
-          ><slot></slot
-        ></span>
+        <span class="text-ellipsis overflow-hidden whitespace-nowrap"><slot></slot></span>
         <Icon v-if="trailingIcon" :name="trailingIcon" />
       </component>
     </template>

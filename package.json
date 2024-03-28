@@ -18,7 +18,7 @@
   "scripts": {
     "auto-fix": "lefthook run auto-fix",
     "build": "rm -rf ./dist && vue-tsc && vite build && vue-tsc -p tsconfig.typegen.json",
-    "ts_check": "tsc --noEmit",
+    "ts_check": "vue-tsc",
     "lint": "eslint ./src --fix",
     "lint:check": "eslint ./src",
     "fmt": "prettier ./src --write",

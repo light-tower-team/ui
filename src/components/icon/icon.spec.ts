@@ -1,14 +1,11 @@
 import { ComponentMountingOptions, shallowMount } from "@vue/test-utils";
-import Icon from "./icon.vue";
-import { ICON_SIZES } from "./constants";
 import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
+import { ICON_SIZES } from "./constants";
+import Icon from "./icon.vue";
 
 const TEST_ICON_NAME = "check-circle";
 
-function mountIcon(
-  options?: ComponentMountingOptions<typeof Icon>,
-  tag = "svg",
-) {
+function mountIcon(options?: ComponentMountingOptions<typeof Icon>, tag = "svg") {
   const wrapper = shallowMount(Icon, {
     ...options,
     props: { name: TEST_ICON_NAME, ...options?.props },

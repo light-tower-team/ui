@@ -1,15 +1,6 @@
 <script setup lang="ts">
 import { ref, toRef, MaybeRef } from "vue";
-import {
-  useFloating,
-  offset,
-  flip,
-  shift,
-  MaybeReadonlyRef,
-  Placement,
-  OffsetOptions,
-  arrow,
-} from "@floating-ui/vue";
+import { useFloating, offset, flip, shift, MaybeReadonlyRef, Placement, OffsetOptions, arrow } from "@floating-ui/vue";
 import TooltipArrow from "./tooltip_arrow.vue";
 
 interface Props {
@@ -35,12 +26,7 @@ const {
 } = useFloating(reference, floating, {
   open: isOpen,
   placement: props.placement,
-  middleware: [
-    offset(4),
-    flip({ fallbackAxisSideDirection: "start" }),
-    shift(),
-    arrow({ element: floatingArrow }),
-  ],
+  middleware: [offset(4), flip({ fallbackAxisSideDirection: "start" }), shift(), arrow({ element: floatingArrow })],
 });
 
 const setReferenceEl = (el: HTMLElement) => {
@@ -70,14 +56,8 @@ const handlePointerLeaveEvent = () => {
         ref="floatingArrow"
         :placement="currentPlacement"
         :style="{
-          left:
-            middlewareData.arrow?.x != null
-              ? `${middlewareData.arrow.x}px`
-              : '',
-          top:
-            middlewareData.arrow?.y != null
-              ? `${middlewareData.arrow.y}px`
-              : '',
+          left: middlewareData.arrow?.x != null ? `${middlewareData.arrow.x}px` : '',
+          top: middlewareData.arrow?.y != null ? `${middlewareData.arrow.y}px` : '',
         }"
       ></TooltipArrow>
     </div>
@@ -88,4 +68,4 @@ const handlePointerLeaveEvent = () => {
     @pointerenter="handlePointerEnterEvent"
     @pointerleave="handlePointerLeaveEvent"
   />
-</template>./tooltip_arrow.vue
+</template>

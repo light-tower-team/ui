@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { PropType, computed } from "vue";
-import {
-  ICONS_PATH,
-  ICON_NAMES,
-  ICON_SIZES,
-  ICON_SIZE_CLASSES,
-} from "./constants";
+import { ICONS_PATH, ICON_NAMES, ICON_SIZES, ICON_SIZE_CLASSES } from "./constants";
 import { contains } from "../../utils/contains";
 
 const props = defineProps({
@@ -25,9 +20,7 @@ const props = defineProps({
 
 const href = computed(() => `${ICONS_PATH}#${props.name}`);
 const sizeClass = computed(() => ICON_SIZE_CLASSES[props.size]);
-const ariaHidden = computed<true | undefined>(() =>
-  !props.ariaLabel ? true : undefined,
-);
+const ariaHidden = computed<true | undefined>(() => (!props.ariaLabel ? true : undefined));
 </script>
 
 <template>
