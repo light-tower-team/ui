@@ -4,7 +4,7 @@ pre-push:
     type-check:
       tags: type check
       glob: "*.{ts,tsx}"
-      run: npx tsc --noEmit
+      run: npx vue-tsc --noEmit
     lint:
       tags: code-style
       files: git diff --name-only --diff-filter=d origin/master...HEAD
