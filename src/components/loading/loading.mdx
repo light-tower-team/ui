@@ -1,0 +1,21 @@
+import { Canvas, Meta, Stories, Controls } from '@storybook/blocks';
+
+import * as LoadingStories from './loading.stories';
+
+<Meta of={LoadingStories} />
+
+# Icon
+
+```js
+import { Loading } from "@light-tower-team/ui";
+```
+
+## Under the hood
+
+Loading icon uses pure css to render a spinner loader.
+
+<Canvas of={LoadingStories.Default} />
+
+<Controls />
+
+<Stories />

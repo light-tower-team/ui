@@ -1,0 +1,24 @@
+import { Canvas, Meta, Stories, Controls } from '@storybook/blocks';
+
+import * as ButtonStories from './button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+```js
+import { Button } from "@light-tower-team/ui";
+```
+
+## Usage
+
+Buttons execute an action, either in the background or foreground of an experience.
+Different button categories help guide users through certain actions.
+Buttons express what action will occur when the user clicks or touches it either by text, icon, or both.
+Additional meaning can be derived from the button variant.
+
+<Canvas of={ButtonStories.Default} />
+
+<Controls />
+
+<Stories />

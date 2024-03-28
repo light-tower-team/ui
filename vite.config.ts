@@ -1,19 +1,32 @@
-import { defineConfig, loadEnv } from "vite";
-import path from "path";
+import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
+import dts from "vite-plugin-dts";
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-
-  return {
-    plugins: [vue()],
-    resolve: {
-      alias: {
-        "~": path.resolve(__dirname, "./src"),
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue(), dts({ rollupTypes: true })],
+  build: {
+    lib: {
+      entry: "./src/index.ts",
+      fileName: "index",
+      formats: ["es"],
+    },
+    rollupOptions: {
+      external: ["vue"],
+      output: {
+        globals: {
+          vue: "Vue",
+        },
       },
     },
-    define: {
-      __DEV__: env.NODE_ENV === "development",
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    coverage: {
+      include: ["src/**/*"],
+      exclude: ["**/*.stories.*", "**/__tests__/**"],
+      provider: "istanbul",
     },
-  };
+  },
 });
