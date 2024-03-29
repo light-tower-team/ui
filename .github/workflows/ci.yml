@@ -64,15 +64,6 @@ jobs:
           node-version-file: ".nvmrc"
           cache: pnpm
           registry-url: https://registry.npmjs.org
-      # - name: Install dependencies
-      #   run: pnpm install --frozen-lockfile
-      # - name: Build storybook
-      #   run: pnpm build-storybook
-      # - name: Deploy storybook
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     branch: gh-pages
-      #     folder: dist/storybook
       - name: Build and publish storybook
         uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         with:
