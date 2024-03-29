@@ -45,7 +45,7 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/master'
     permissions:
-      contents: write
+      contents: read
       pages: write
       id-token: write
     steps:
@@ -65,7 +65,7 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
       - name: Build and publish storybook
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.1
         with:
           install_command: pnpm install --frozen-lockfile
           build_command: pnpm build-storybook
