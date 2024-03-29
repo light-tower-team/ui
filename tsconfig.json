@@ -19,5 +19,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vitest/globals"]
   },
-  "include": ["**/*.ts", "**/*.vue"]
+  "include": ["**/*.ts", "**/*.vue", "**/*.js", ".storybook/**/*.ts"],
+  "exclude": ["node_modules", "dist", "coverage"]
 }
