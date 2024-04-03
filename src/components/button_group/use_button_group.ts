@@ -1,7 +1,7 @@
 import { MaybeRef, computed, provide, ref, toRef } from "vue";
+import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from "../button";
 import { BUTTON_GROUP, BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "./constants";
 import { GroupButton } from "./types";
-import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from "../button";
 
 export interface UseButtonGroupParams {
   orientation: MaybeRef<BUTTON_GROUP_ORIENTATION>;

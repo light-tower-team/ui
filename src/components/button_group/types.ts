@@ -1,6 +1,6 @@
 import { Ref } from "vue";
-import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "./constants";
 import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from "../button/constants";
+import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "./constants";
 
 export interface GroupButton {
   registerButton(): string;

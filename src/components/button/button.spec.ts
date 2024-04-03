@@ -1,11 +1,11 @@
 import { ComponentMountingOptions, mount } from "@vue/test-utils";
+import { ref } from "vue";
 import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
+import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../button_group";
+import { UseGroupButtonReturnValue } from "../button_group/use_group_button";
 import Button from "./button.vue";
 import { BUTTON_VARIANT_CLASSES, BUTTON_VARIANTS, BUTTON_COLORS, BUTTON_SIZES } from "./constants";
 import { buildButtonClasses } from "./utils/build_button_classes";
-import { ref } from "vue";
-import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../button_group";
-import { UseGroupButtonReturnValue } from "../button_group/use_group_button";
 
 const useGroupButton = vi.hoisted(() => vi.fn<[], UseGroupButtonReturnValue>(() => ({})));
 

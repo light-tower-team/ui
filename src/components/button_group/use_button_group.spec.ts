@@ -1,7 +1,4 @@
 import { UnwrapNestedRefs, reactive } from "vue";
-import { BUTTON_GROUP, BUTTON_GROUP_ORIENTATION, DEFAULT_BUTTON_GROUP_ORIENTATION } from "./constants";
-import { GroupButton } from "./types";
-import { UseButtonGroupParams, useButtonGroup as _useButtonGroup } from "./use_button_group";
 import {
   BUTTON_COLORS,
   BUTTON_SIZES,
@@ -10,8 +7,11 @@ import {
   DEFAULT_BUTTON_SIZE,
   DEFAULT_BUTTON_VARIANT,
 } from "../button";
+import { BUTTON_GROUP, BUTTON_GROUP_ORIENTATION, DEFAULT_BUTTON_GROUP_ORIENTATION } from "./constants";
+import { GroupButton } from "./types";
+import { UseButtonGroupParams, useButtonGroup as _useButtonGroup } from "./use_button_group";
 
-const provide = vi.hoisted(() => vi.fn<[Symbol, GroupButton]>());
+const provide = vi.hoisted(() => vi.fn<[symbol, GroupButton]>());
 
 vi.mock("vue", async (importOriginal) => {
   return {

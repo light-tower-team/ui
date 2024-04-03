@@ -1,9 +1,9 @@
-import { defineComponent, ref } from "vue";
-import { mount } from "@vue/test-utils";
 import { faker } from "@faker-js/faker";
-import { UseGroupButtonReturnValue, useGroupButton } from "./use_group_button";
+import { mount } from "@vue/test-utils";
+import { defineComponent, ref } from "vue";
 import { BUTTON_GROUP, GROUP_BUTTON_PLACE } from "./constants";
 import { GroupButton } from "./types";
+import { UseGroupButtonReturnValue, useGroupButton } from "./use_group_button";
 
 describe("useGroupButton", () => {
   let group: GroupButton;

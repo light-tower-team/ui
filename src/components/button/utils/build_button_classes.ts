@@ -1,5 +1,6 @@
 import { normalizeClass } from "vue";
 import { RING_CLASS } from "../../../utils/constants";
+import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../../button_group";
 import {
   BUTTON_CLASS,
   BUTTON_COLORS,
@@ -26,7 +27,6 @@ import {
   ROUNDED_BUTTON_CLASS,
   VERTICAL_GROUP_BUTTON_CLASS,
 } from "../constants";
-import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../../button_group";
 
 interface BuildButtonClassesParams {
   size?: BUTTON_SIZES;

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import ButtonGroup from "./button_group.vue";
 import Button, {
   BUTTON_COLORS,
   BUTTON_SIZES,
@@ -8,6 +7,7 @@ import Button, {
   DEFAULT_BUTTON_SIZE,
   DEFAULT_BUTTON_VARIANT,
 } from "../button";
+import ButtonGroup from "./button_group.vue";
 import { BUTTON_GROUP_ORIENTATION, DEFAULT_BUTTON_GROUP_ORIENTATION } from "./constants";
 
 const meta: Meta<typeof ButtonGroup> = {
