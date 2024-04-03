@@ -78,7 +78,7 @@ jobs:
         run: pnpm test:visual:affected
   publish_storybook:
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, visual-test]
     if: github.ref == 'refs/heads/master'
     permissions:
       contents: write
