@@ -53,7 +53,7 @@ const config: TestRunnerConfig = {
 
     const image = await page.screenshot();
 
-    expect(image).toMatchImageSnapshot({
+    (expect(image) as unknown as { toMatchImageSnapshot: <T>(t: T) => void }).toMatchImageSnapshot({
       customSnapshotsDir: CUSTOM_SNAPSHOTS_DIR,
       failureThreshold: FAILURE_THRESHOLD,
       failureThresholdType: FAILURE_THRESHOLD_TYPE,

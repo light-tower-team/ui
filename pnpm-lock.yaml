@@ -58,9 +58,6 @@ devDependencies:
   '@types/feather-icons':
     specifier: ^4.29.4
     version: 4.29.4
-  '@types/jest-image-snapshot':
-    specifier: ^6.4.0
-    version: 6.4.0
   '@types/node':
     specifier: ^20.12.3
     version: 20.12.3
@@ -3727,21 +3724,6 @@ packages:
       '@types/istanbul-lib-report': 3.0.3
     dev: true
 
-  /@types/jest-image-snapshot@6.4.0:
-    resolution: {integrity: sha512-8TQ/EgqFCX0UWSpH488zAc21fCkJNpZPnnp3xWFMqElxApoJV5QOoqajnVRV7AhfF0rbQWTVyc04KG7tXnzCPA==}
-    dependencies:
-      '@types/jest': 29.5.12
-      '@types/pixelmatch': 5.2.6
-      ssim.js: 3.5.0
-    dev: true
-
-  /@types/jest@29.5.12:
-    resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
-    dependencies:
-      expect: 29.7.0
-      pretty-format: 29.7.0
-    dev: true
-
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
@@ -3776,12 +3758,6 @@ packages:
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
-    dev: true
-
-  /@types/pixelmatch@5.2.6:
-    resolution: {integrity: sha512-wC83uexE5KGuUODn6zkm9gMzTwdY5L0chiK+VrKcDfEjzxh1uadlWTvOmAbCpnM9zx/Ww3f8uKlYQVnO/TrqVg==}
-    dependencies:
-      '@types/node': 20.12.3
     dev: true
 
   /@types/pretty-hrtime@1.0.3:
