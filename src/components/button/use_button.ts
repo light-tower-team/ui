@@ -1,6 +1,6 @@
 import { Component, MaybeRef, computed, reactive, readonly, ref, toRef, toValue } from "vue";
 import { contains } from "../../utils/contains";
-import { BUTTON_TYPES } from "./constants";
+import { BUTTON_TYPES, DEFAULT_BUTTON_TAG, DEFAULT_BUTTON_TYPE } from "./constants";
 
 export interface UseButtonParams {
   is?: string | Component;
@@ -50,14 +50,14 @@ export function useButton(params: UseButtonParams = {}): UseButtonReturnValue {
   const is = computed(() => {
     const is = toValue(params.is);
 
-    return isLink.value ? "a" : is ?? "button";
+    return isLink.value ? "a" : is ?? DEFAULT_BUTTON_TAG;
   });
 
   const isNativeButton = computed<boolean>(() => {
     const type = toValue(params.type);
 
     const isButton = is.value === "button";
-    const isFormButton = is.value === "input" && contains(["button", "submit", "reset"], type);
+    const isFormButton = is.value === "input" && contains(BUTTON_TYPES, type);
 
     return isButton || isFormButton;
   });
@@ -84,7 +84,7 @@ export function useButton(params: UseButtonParams = {}): UseButtonReturnValue {
   const type = computed(() => {
     const type = toValue(params.type);
 
-    return isNativeButton.value ? type ?? "button" : undefined;
+    return isNativeButton.value ? type ?? DEFAULT_BUTTON_TYPE : undefined;
   });
 
   const tabIndex = computed(() => {

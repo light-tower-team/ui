@@ -3,6 +3,18 @@ import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
 import Button from "./button.vue";
 import { BUTTON_VARIANT_CLASSES, BUTTON_VARIANTS, BUTTON_COLORS, BUTTON_SIZES } from "./constants";
 import { buildButtonClasses } from "./utils/build_button_classes";
+import { ref } from "vue";
+import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../button_group";
+import { UseGroupButtonReturnValue } from "../button_group/use_group_button";
+
+const useGroupButton = vi.hoisted(() => vi.fn<[], UseGroupButtonReturnValue>(() => ({})));
+
+vi.mock("../button_group/use_group_button", async (importOriginal) => {
+  return {
+    ...(await importOriginal<typeof import("../button_group/use_group_button")>()),
+    useGroupButton,
+  };
+});
 
 const BUTTON_VARIANTS_AND_COLORS = Object.entries(BUTTON_VARIANT_CLASSES).reduce<
   Array<{ variant: BUTTON_VARIANTS; color: BUTTON_COLORS }>
@@ -233,32 +245,66 @@ describe("button", () => {
 
       expect(console.warn).toHaveBeenCalledOnce();
     });
-  });
 
-  it("should render a leading icon", () => {
-    const { btn } = mountButton({
-      props: { leadingIcon: "star", ariaLabel: "favorite" },
+    it("should render a leading icon", () => {
+      const { btn } = mountButton({
+        props: { leadingIcon: "star", ariaLabel: "favorite" },
+      });
+
+      expect(btn.find("svg[role='img']").exists()).toBeTruthy();
     });
 
-    expect(btn.find("svg[role='img']").exists()).toBeTruthy();
-  });
+    it("should render a trailing icon", () => {
+      const { btn } = mountButton({
+        props: { trailingIcon: "star", ariaLabel: "favorite" },
+      });
 
-  it("should render a trailing icon", () => {
-    const { btn } = mountButton({
-      props: { trailingIcon: "star", ariaLabel: "favorite" },
+      expect(btn.find("svg[role='img']").exists()).toBeTruthy();
     });
 
-    expect(btn.find("svg[role='img']").exists()).toBeTruthy();
+    it("should correctly detect empty content for icon only mode", () => {
+      const wrapper = mount({
+        components: { Button },
+        template: `<Button leading-icon="star" aria-label="favorite"><slot><span v-if="false">not-rendered</span></slot></Button>`,
+      });
+
+      const btn = wrapper.get("button");
+
+      expect(btn.classes().join(" ")).toContain(buildButtonClasses({ hasOnlyIcon: true }));
+    });
   });
 
-  it("should correctly detect empty content for icon only mode", () => {
-    const wrapper = mount({
-      components: { Button },
-      template: `<Button leading-icon="star" aria-label="favorite"><slot><span v-if="false">not-rendered</span></slot></Button>`,
+  describe("in a button group", () => {
+    it.each<{ groupOrientation: BUTTON_GROUP_ORIENTATION; groupPlace: GROUP_BUTTON_PLACE }>([
+      { groupOrientation: "horizontal", groupPlace: "first-and-last" },
+      { groupOrientation: "horizontal", groupPlace: "first" },
+      { groupOrientation: "horizontal", groupPlace: "middle" },
+      { groupOrientation: "horizontal", groupPlace: "last" },
+      { groupOrientation: "vertical", groupPlace: "first-and-last" },
+      { groupOrientation: "vertical", groupPlace: "first" },
+      { groupOrientation: "vertical", groupPlace: "middle" },
+      { groupOrientation: "vertical", groupPlace: "last" },
+    ])(
+      "should apply group button styles when the group orientation is $groupOrientation and the button place is $groupPlace",
+      ({ groupOrientation, groupPlace }) => {
+        useGroupButton.mockReturnValueOnce({ groupOrientation: ref(groupOrientation), groupPlace: ref(groupPlace) });
+
+        const { btn } = mountButton();
+
+        expect(btn.classes().join(" ")).toEqual(buildButtonClasses({ groupOrientation, groupPlace }));
+      },
+    );
+
+    it.each([
+      { prop: "color", value: "danger" },
+      { prop: "size", value: "xl" },
+      { prop: "variant", value: "filled" },
+    ])("should has the $value value of the $prop prop of the button group", ({ prop, value }) => {
+      useGroupButton.mockReturnValueOnce({ [prop]: ref(value) });
+
+      const { btn } = mountButton();
+
+      expect(btn.classes().join(" ")).toEqual(buildButtonClasses({ [prop]: value }));
     });
-
-    const btn = wrapper.get("button");
-
-    expect(btn.classes().join(" ")).toContain(buildButtonClasses({ hasOnlyIcon: true }));
   });
 });

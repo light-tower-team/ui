@@ -46,6 +46,7 @@ export const Rounded: Story = {
     template: `
       <div class="inline-flex flex-col gap-2 p-2">
         <Button variant='text' rounded>Text button</Button>
+        <Button variant='filled-tonal' rounded>Filled button</Button>
         <Button variant='outlined' rounded>Outlined button</Button>
         <Button variant='filled' rounded>Filled button</Button>
       </div>
@@ -57,8 +58,9 @@ export const FullWidth: Story = {
   render: () => ({
     components: { Button },
     template: `
-      <div class="inline-flex flex-col gap-2 p-2">
+      <div class="flex flex-col gap-2 p-2">
         <Button variant='text' full-width>Text button</Button>
+        <Button variant='filled-tonal' full-width>Filled button</Button>
         <Button variant='outlined' full-width>Outlined button</Button>
         <Button variant='filled' full-width>Filled button</Button>
       </div>
@@ -120,7 +122,22 @@ export const WithOverflowedText: Story = {
     components: { Button },
     template: `
       <div class="inline-flex flex-col gap-2 p-2">
-        <Button class="w-28">Add new issue</Button>
+        <Button class="w-20">Very long text</Button>
+      </div>
+    `,
+  }),
+};
+
+export const Sizes: Story = {
+  render: () => ({
+    components: { Button },
+    template: `
+      <div class="inline-flex flex-col gap-2 p-2">
+        <Button size='xs'>Extra small button</Button>
+        <Button size='sm'>Small button</Button>
+        <Button size='md'>Medium button</Button>
+        <Button size='lg'>Large button</Button>
+        <Button size='xl'>Extra large button</Button>
       </div>
     `,
   }),

@@ -1,3 +1,9 @@
+export const ANCHOR_TARGET = ["_self", "_blank", "_parent", "_top"] as const;
+export type ANCHOR_TARGET = (typeof ANCHOR_TARGET)[number];
+
+export const BUTTON_TYPES = ["button", "submit", "reset"] as const;
+export type BUTTON_TYPES = (typeof BUTTON_TYPES)[number];
+
 export const BUTTON_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 export type BUTTON_SIZES = (typeof BUTTON_SIZES)[number];
 
@@ -7,15 +13,21 @@ export type BUTTON_VARIANTS = (typeof BUTTON_VARIANTS)[number];
 export const BUTTON_COLORS = ["neutral", "primary", "danger"] as const;
 export type BUTTON_COLORS = (typeof BUTTON_COLORS)[number];
 
-export const BUTTON_SIZE_CLASSES: Record<BUTTON_SIZES, string> = {
-  xs: "h-4",
-  sm: "h-6",
-  md: "h-8",
-  lg: "h-10",
-  xl: "h-12",
+export const DEFAULT_BUTTON_TAG = "button";
+export const DEFAULT_BUTTON_TYPE = "button" satisfies BUTTON_TYPES;
+export const DEFAULT_BUTTON_COLOR = "neutral" satisfies BUTTON_COLORS;
+export const DEFAULT_BUTTON_SIZE = "md" satisfies BUTTON_SIZES;
+export const DEFAULT_BUTTON_VARIANT = "outlined" satisfies BUTTON_VARIANTS;
+
+export const BUTTON_SIZE_CLASSES: Readonly<Record<BUTTON_SIZES, string>> = {
+  xs: "h-4 px-1 py-0",
+  sm: "h-6 px-2 py-1",
+  md: "h-8 px-3 py-2",
+  lg: "h-10 px-3 py-2",
+  xl: "h-12 px-4 py-3",
 };
 
-export const ICON_BUTTON_SIZE_CLASSES: Record<BUTTON_SIZES, string> = {
+export const ICON_BUTTON_SIZE_CLASSES: Readonly<Record<BUTTON_SIZES, string>> = {
   xs: "w-4 h-4",
   sm: "w-6 h-6",
   md: "w-8 h-8",
@@ -23,7 +35,7 @@ export const ICON_BUTTON_SIZE_CLASSES: Record<BUTTON_SIZES, string> = {
   xl: "w-12 h-12",
 };
 
-export const BUTTON_VARIANT_CLASSES: Record<BUTTON_VARIANTS, Record<BUTTON_COLORS, string>> = {
+export const BUTTON_VARIANT_CLASSES: Readonly<Record<BUTTON_VARIANTS, Readonly<Record<BUTTON_COLORS, string>>>> = {
   filled: {
     neutral:
       "text-white border-transparent bg-gray-600 enabled:hover:text-white enabled:hover:bg-gray-700 enabled:focus:text-white enabled:focus:bg-gray-700 enabled:active:text-white enabled:active:bg-gray-800",
@@ -58,24 +70,45 @@ export const BUTTON_VARIANT_CLASSES: Record<BUTTON_VARIANTS, Record<BUTTON_COLOR
   },
 };
 
-export const LOADING_BUTTON_CLASS = "text-gray-500 bg-gray-100 border-gray-300";
+export const GROUP_BUTTON_VARIANT_CLASSES: Readonly<
+  Partial<Record<BUTTON_VARIANTS, Readonly<Record<BUTTON_COLORS, string>>>>
+> = {
+  filled: {
+    neutral: "border-l-gray-700",
+    primary: "border-l-blue-700",
+    danger: "border-l-red-700",
+  },
+  "filled-tonal": {
+    neutral: "border-l-gray-300",
+    primary: "border-l-blue-300",
+    danger: "border-l-red-300",
+  },
+};
 
-export const BUTTON_SPACING_CLASS = "px-3";
+export const LOADING_BUTTON_CLASS = "text-gray-500 bg-gray-100 border-gray-300";
 
 export const BUTTON_CLASS =
   "inline-flex justify-center items-center outline-none border transition-all font-normal gap-1 select-none";
 
-export const DEFAULT_BUTTON_WIDTH_CLASS = "w-fit";
 export const FULL_BUTTON_WIDTH_CLASS = "w-full";
 
 export const DEFAULT_ROUNDED_BUTTON_CLASS = "rounded";
 export const ROUNDED_BUTTON_CLASS = "rounded-full";
+
+export const GROUP_BUTTON_CLASS = "focus:z-10";
+
+export const FIRST_HORIZONTAL_GROUP_BUTTON_CLASS = "rounded-l";
+export const MIDDLE_HORIZONTAL_GROUP_BUTTON_CLASS = "-ml-px";
+export const LAST_HORIZONTAL_GROUP_BUTTON_CLASS = "-ml-px rounded-r";
+
+export const VERTICAL_GROUP_BUTTON_CLASS = "w-auto";
+
+export const FIRST_VERTICAL_GROUP_BUTTON_CLASS = "rounded-t";
+export const MIDDLE_VERTICAL_GROUP_BUTTON_CLASS = "-mt-px";
+export const LAST_VERTICAL_GROUP_BUTTON_CLASS = "-mt-px rounded-b";
 
 export const DISABLED_BUTTON_CLASS = "disabled:opacity-75 disabled:select-none disabled:cursor-default";
 
 export const BUTTON_WARNINGS = {
   noLabel: "[button]: Accessible name missing. Please add aria-label.",
 } as const;
-
-export const BUTTON_TYPES = ["submit", "reset", "button"] as const satisfies Array<HTMLButtonElement["type"]>;
-export type BUTTON_TYPES = (typeof BUTTON_TYPES)[number];

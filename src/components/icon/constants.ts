@@ -8,8 +8,8 @@ export type ICON_SIZES = (typeof ICON_SIZES)[number];
 export const ICON_NAMES = Object.keys(icons);
 export type ICON_NAMES = (typeof ICON_NAMES)[number];
 
-export const ICON_SIZE_CLASSES = {
+export const ICON_SIZE_CLASSES: Readonly<Record<ICON_SIZES, string>> = {
   16: "w-4 h-4",
   24: "w-6 h-6",
   32: "w-8 h-8",
-} as const satisfies Record<ICON_SIZES, string>;
+};

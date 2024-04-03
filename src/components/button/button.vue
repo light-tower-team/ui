@@ -3,16 +3,27 @@ import { toRefs, PropType, computed, toValue, useSlots, watchEffect } from "vue"
 import Tooltip from "../tooltip";
 import Loading from "../loading";
 import Icon from "../icon";
-import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_TYPES, BUTTON_VARIANTS, BUTTON_WARNINGS } from "./constants";
+import {
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  BUTTON_WARNINGS,
+  DEFAULT_BUTTON_COLOR,
+  DEFAULT_BUTTON_SIZE,
+  DEFAULT_BUTTON_TAG,
+  DEFAULT_BUTTON_VARIANT,
+} from "./constants";
 import { useButton } from "./use_button";
 
 import { contains } from "../../utils/contains";
 import { ICON_NAMES } from "../icon/constants";
 import { buildButtonClasses } from "./utils/build_button_classes";
 import { isEmpty } from "../../utils/is_empty";
+import { useGroupButton } from "../button_group";
+import { BUTTON_VARIANTS } from ".";
 
 const props = defineProps({
-  is: { type: String, required: false, default: "button" },
+  is: { type: String, required: false, default: DEFAULT_BUTTON_TAG },
   type: {
     type: String as PropType<BUTTON_TYPES>,
     required: false,
@@ -21,19 +32,19 @@ const props = defineProps({
   color: {
     type: String as PropType<BUTTON_COLORS>,
     required: false,
-    default: "neutral",
+    default: DEFAULT_BUTTON_COLOR,
     validator: (value) => contains(BUTTON_COLORS, value),
   },
   size: {
     type: String as PropType<BUTTON_SIZES>,
     required: false,
-    default: "md",
+    default: DEFAULT_BUTTON_SIZE,
     validator: (value) => contains(BUTTON_SIZES, value),
   },
   variant: {
     type: String as PropType<BUTTON_VARIANTS>,
     required: false,
-    default: "outlined",
+    default: DEFAULT_BUTTON_VARIANT,
     validator: (value) => contains(BUTTON_VARIANTS, value),
   },
   leadingIcon: { type: String as PropType<ICON_NAMES>, required: false },
@@ -66,22 +77,30 @@ const hasOnlyIcon = computed<boolean>(() => {
   return withoutContent && (withOnlyLeadingIcon || withOnlyTrailingIcon);
 });
 
-const classes = computed(() =>
-  buildButtonClasses({
-    loading: toValue(props.loading),
-    variant: toValue(props.variant),
-    color: toValue(props.color),
-    size: toValue(props.size),
-    fullWidth: toValue(props.fullWidth),
-    rounded: toValue(props.rounded),
-    hasOnlyIcon: hasOnlyIcon.value,
-  }),
-);
-
 const { is, buttonProps } = useButton({
   ...toRefs(props),
   onPressed: (event) => emits("click", event),
 });
+
+const { groupPlace, groupOrientation, ...groupButtonProps } = useGroupButton();
+
+const color = computed(() => groupButtonProps.color?.value ?? props.color);
+const size = computed(() => groupButtonProps.size?.value ?? props.size);
+const variant = computed(() => groupButtonProps.variant?.value ?? props.variant);
+
+const classes = computed(() =>
+  buildButtonClasses({
+    loading: toValue(props.loading),
+    fullWidth: toValue(props.fullWidth),
+    rounded: toValue(props.rounded),
+    color: color.value,
+    size: size.value,
+    variant: variant.value,
+    hasOnlyIcon: hasOnlyIcon.value,
+    groupPlace: groupPlace?.value,
+    groupOrientation: groupOrientation?.value,
+  }),
+);
 
 watchEffect(
   () => {
@@ -102,7 +121,7 @@ watchEffect(
           <Loading />
         </slot>
         <Icon v-if="leadingIcon" :name="leadingIcon" />
-        <span class="text-ellipsis overflow-hidden whitespace-nowrap"><slot></slot></span>
+        <span v-if="hasContent" class="text-ellipsis overflow-hidden whitespace-nowrap text-sm"><slot></slot></span>
         <Icon v-if="trailingIcon" :name="trailingIcon" />
       </component>
     </template>
