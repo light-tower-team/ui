@@ -21,6 +21,7 @@ import { buildButtonClasses } from "./utils/build_button_classes";
 import { isEmpty } from "../../utils/is_empty";
 import { useGroupButton } from "../button_group";
 import { BUTTON_VARIANTS } from ".";
+import Typography from "../typography";
 
 const props = defineProps({
   is: { type: String, required: false, default: DEFAULT_BUTTON_TAG },
@@ -121,7 +122,7 @@ watchEffect(
           <Loading />
         </slot>
         <Icon v-if="leadingIcon" :name="leadingIcon" />
-        <span v-if="hasContent" class="text-ellipsis overflow-hidden whitespace-nowrap text-sm"><slot></slot></span>
+        <Typography v-if="hasContent" is="span" variant="body" color="inherit" truncate><slot></slot></Typography>
         <Icon v-if="trailingIcon" :name="trailingIcon" />
       </component>
     </template>

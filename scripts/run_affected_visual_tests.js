@@ -1,5 +1,6 @@
-import path from "node:path";
+/* eslint-disable no-undef, no-console */
 import { spawn } from "node:child_process";
+import path from "node:path";
 import fg from "fast-glob";
 
 const SOURCE_PATH_REGEX = /^src\/.+/;
