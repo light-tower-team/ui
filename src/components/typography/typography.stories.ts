@@ -4,6 +4,7 @@ import { TYPOGRAPHY_COLORS, TYPOGRAPHY_VARIANTS } from "./constants";
 import Typography from "./typography.vue";
 
 const meta: Meta<typeof Typography> = {
+  title: "components/typography",
   component: Typography,
   argTypes: {
     variant: {

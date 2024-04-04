@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3";
 import Loading from "./loading.vue";
 
 const meta: Meta<typeof Loading> = {
+  title: "components/loading",
   component: Loading,
 };
 

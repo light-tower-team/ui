@@ -11,6 +11,7 @@ import ButtonGroup from "./button_group.vue";
 import { BUTTON_GROUP_ORIENTATION, DEFAULT_BUTTON_GROUP_ORIENTATION } from "./constants";
 
 const meta: Meta<typeof ButtonGroup> = {
+  title: "components/button_group",
   component: ButtonGroup,
   argTypes: {
     orientation: {

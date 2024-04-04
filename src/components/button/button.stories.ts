@@ -3,6 +3,7 @@ import Button from "./button.vue";
 import { BUTTON_SIZES, BUTTON_VARIANTS, BUTTON_COLORS } from "./constants";
 
 const meta: Meta<typeof Button> = {
+  title: "components/button",
   component: Button,
   argTypes: {
     size: {
