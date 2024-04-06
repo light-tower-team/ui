@@ -20,11 +20,11 @@ export const DEFAULT_BUTTON_SIZE = "md" satisfies BUTTON_SIZES;
 export const DEFAULT_BUTTON_VARIANT = "outlined" satisfies BUTTON_VARIANTS;
 
 export const BUTTON_SIZE_CLASSES: Readonly<Record<BUTTON_SIZES, string>> = {
-  xs: "h-4 px-1 py-0",
-  sm: "h-6 px-2 py-1",
-  md: "h-8 px-3 py-2",
-  lg: "h-10 px-3 py-2",
-  xl: "h-12 px-4 py-3",
+  xs: "h-4 px-0.5 py-0",
+  sm: "h-6 px-1.5 py-0.5",
+  md: "h-8 px-2.5 py-1.5",
+  lg: "h-10 px-2.5 py-1.5",
+  xl: "h-12 px-3.5 py-2.5",
 };
 
 export const ICON_BUTTON_SIZE_CLASSES: Readonly<Record<BUTTON_SIZES, string>> = {
@@ -38,7 +38,7 @@ export const ICON_BUTTON_SIZE_CLASSES: Readonly<Record<BUTTON_SIZES, string>> = 
 export const BUTTON_VARIANT_CLASSES: Readonly<Record<BUTTON_VARIANTS, Readonly<Record<BUTTON_COLORS, string>>>> = {
   filled: {
     neutral:
-      "text-white border-transparent bg-gray-600 enabled:hover:text-white enabled:hover:bg-gray-700 enabled:focus:text-white enabled:focus:bg-gray-700 enabled:active:text-white enabled:active:bg-gray-800",
+      "text-white border-transparent bg-zinc-600 enabled:hover:text-white enabled:hover:bg-zinc-700 enabled:focus:text-white enabled:focus:bg-zinc-700 enabled:active:text-white enabled:active:bg-zinc-800",
     primary:
       "text-white border-transparent bg-blue-600 enabled:hover:text-white enabled:hover:bg-blue-700 enabled:focus:text-white enabled:focus:bg-blue-700 enabled:active:text-white enabled:active:bg-blue-800",
     danger:
@@ -46,7 +46,7 @@ export const BUTTON_VARIANT_CLASSES: Readonly<Record<BUTTON_VARIANTS, Readonly<R
   },
   "filled-tonal": {
     neutral:
-      "text-gray-600 border-transparent bg-gray-200 enabled:hover:text-gray-700 enabled:hover:bg-gray-300 enabled:focus:text-gray-700 enabled:focus:bg-gray-300 enabled:active:text-gray-800 enabled:active:bg-gray-400",
+      "text-zinc-600 border-transparent bg-zinc-200 enabled:hover:text-zinc-700 enabled:hover:bg-zinc-300 enabled:focus:text-zinc-700 enabled:focus:bg-zinc-300 enabled:active:text-zinc-800 enabled:active:bg-zinc-400",
     primary:
       "text-blue-700 border-transparent bg-blue-200 enabled:hover:text-blue-800 enabled:hover:bg-blue-300 enabled:focus:text-blue-800 enabled:focus:bg-blue-300 enabled:active:text-blue-900 enabled:active:bg-blue-400",
     danger:
@@ -54,7 +54,7 @@ export const BUTTON_VARIANT_CLASSES: Readonly<Record<BUTTON_VARIANTS, Readonly<R
   },
   text: {
     neutral:
-      "text-gray-600 border-transparent enabled:hover:text-gray-700 enabled:hover:bg-gray-100 enabled:focus:text-gray-700 enabled:focus:bg-gray-100 enabled:active:text-gray-800 enabled:active:bg-gray-200",
+      "text-zinc-600 border-transparent enabled:hover:text-zinc-700 enabled:hover:bg-zinc-100 enabled:focus:text-zinc-700 enabled:focus:bg-zinc-100 enabled:active:text-zinc-800 enabled:active:bg-zinc-200",
     primary:
       "text-blue-600 border-transparent enabled:hover:text-blue-700 enabled:hover:bg-blue-100 enabled:focus:text-blue-700 enabled:focus:bg-blue-100 enabled:active:text-blue-800 enabled:active:bg-blue-200",
     danger:
@@ -62,11 +62,11 @@ export const BUTTON_VARIANT_CLASSES: Readonly<Record<BUTTON_VARIANTS, Readonly<R
   },
   outlined: {
     neutral:
-      "text-gray-600 border-gray-600 hover:text-gray-700 enabled:hover:bg-gray-100 enabled:hover:border-gray-700 enabled:focus:text-gray-700 enabled:focus:bg-gray-100 enabled:focus:border-gray-700 enabled:active:text-gray-800 enabled:active:bg-gray-200 enabled:active:border-gray-800",
+      "text-zinc-600 border-zinc-400 hover:text-zinc-700 enabled:hover:bg-zinc-100 enabled:hover:border-zinc-500 enabled:focus:text-zinc-700 enabled:focus:bg-zinc-100 enabled:focus:border-zinc-500 enabled:active:text-zinc-800 enabled:active:bg-zinc-200 enabled:active:border-zinc-600",
     primary:
-      "text-blue-600 border-blue-600 enabled:hover:text-blue-700 enabled:hover:bg-blue-100 enabled:hover:border-blue-700 enabled:focus:text-blue-700 enabled:focus:bg-blue-100 enabled:focus:border-blue-700 enabled:active:text-blue-800 enabled:active:bg-blue-200 enabled:active:border-blue-800",
+      "text-blue-600 border-blue-400 enabled:hover:text-blue-700 enabled:hover:bg-blue-100 enabled:hover:border-blue-500 enabled:focus:text-blue-700 enabled:focus:bg-blue-100 enabled:focus:border-blue-500 enabled:active:text-blue-800 enabled:active:bg-blue-200 enabled:active:border-blue-600",
     danger:
-      "text-red-600 border-red-600 enabled:hover:text-red-700 enabled:hover:bg-red-100 enabled:hover:border-red-700 enabled:focus:text-red-700 enabled:focus:bg-red-100 enabled:focus:border-red-700 enabled:active:text-red-800 enabled:active:bg-red-200 enabled:active:border-red-800",
+      "text-red-600 border-red-400 enabled:hover:text-red-700 enabled:hover:bg-red-100 enabled:hover:border-red-500 enabled:focus:text-red-700 enabled:focus:bg-red-100 enabled:focus:border-red-500 enabled:active:text-red-800 enabled:active:bg-red-200 enabled:active:border-red-600",
   },
 };
 
@@ -74,18 +74,18 @@ export const GROUP_BUTTON_VARIANT_CLASSES: Readonly<
   Partial<Record<BUTTON_VARIANTS, Readonly<Record<BUTTON_COLORS, string>>>>
 > = {
   filled: {
-    neutral: "border-l-gray-700",
+    neutral: "border-l-zinc-700",
     primary: "border-l-blue-700",
     danger: "border-l-red-700",
   },
   "filled-tonal": {
-    neutral: "border-l-gray-300",
+    neutral: "border-l-zinc-300",
     primary: "border-l-blue-300",
     danger: "border-l-red-300",
   },
 };
 
-export const LOADING_BUTTON_CLASS = "text-gray-500 bg-gray-100 border-gray-300";
+export const LOADING_BUTTON_CLASS = "text-zinc-500 bg-zinc-100 border-zinc-300";
 
 export const BUTTON_CLASS =
   "inline-flex justify-center items-center outline-none border transition-all font-normal gap-1 select-none";

@@ -19,7 +19,7 @@ const props = defineProps({
 });
 
 const href = computed(() => `${ICONS_PATH}#${props.name}`);
-const sizeClass = computed(() => ICON_SIZE_CLASSES[props.size]);
+const classes = computed(() => ["shrink-0 grow-0", ICON_SIZE_CLASSES[props.size]]);
 const ariaHidden = computed<true | undefined>(() => (!props.ariaLabel ? true : undefined));
 </script>
 
@@ -28,7 +28,7 @@ const ariaHidden = computed<true | undefined>(() => (!props.ariaLabel ? true : u
     role="img"
     :aria-hidden="ariaHidden"
     :aria-label="ariaLabel"
-    :class="sizeClass"
+    :class="classes"
     fill="none"
     stroke="currentColor"
     stroke-width="2"

@@ -4,7 +4,7 @@ import { useMockedConsole } from "../../utils/__tests__/use_mocked_console";
 import { BUTTON_GROUP_ORIENTATION, GROUP_BUTTON_PLACE } from "../button_group";
 import { UseGroupButtonReturnValue } from "../button_group/use_group_button";
 import Button from "./button.vue";
-import { BUTTON_VARIANT_CLASSES, BUTTON_VARIANTS, BUTTON_COLORS, BUTTON_SIZES } from "./constants";
+import { BUTTON_VARIANTS, BUTTON_COLORS, BUTTON_SIZES } from "./constants";
 import { buildButtonClasses } from "./utils/build_button_classes";
 
 const useGroupButton = vi.hoisted(() => vi.fn<[], UseGroupButtonReturnValue>(() => ({})));
@@ -16,18 +16,14 @@ vi.mock("../button_group/use_group_button", async (importOriginal) => {
   };
 });
 
-const BUTTON_VARIANTS_AND_COLORS = Object.entries(BUTTON_VARIANT_CLASSES).reduce<
-  Array<{ variant: BUTTON_VARIANTS; color: BUTTON_COLORS }>
->((acc, [variant, colors]) => {
-  Object.keys(colors).forEach((color) => {
-    acc.push({
-      variant: variant as BUTTON_VARIANTS,
-      color: color as BUTTON_COLORS,
-    });
-  });
+const BUTTON_VARIANTS_AND_COLORS = BUTTON_VARIANTS.reduce<Array<{ variant: BUTTON_VARIANTS; color: BUTTON_COLORS }>>(
+  (acc, variant) => {
+    BUTTON_COLORS.forEach((color) => acc.push({ variant, color }));
 
-  return acc;
-}, []);
+    return acc;
+  },
+  [],
+);
 
 function mountButton(options?: ComponentMountingOptions<typeof Button>, tag = "button") {
   const wrapper = mount(Button, options);

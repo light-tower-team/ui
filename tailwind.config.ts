@@ -12,13 +12,24 @@ export default {
       "3": "3px",
       "4": "4px",
     },
-    extend: {},
+    fontFamily: {
+      sans: ["Inter"],
+    },
+    fontSize: {
+      sm: ["0.875rem", "1rem"],
+    },
+    extend: {
+      width: {
+        "100": "32rem",
+      },
+    },
   },
   plugins: [
     plugin(({ addVariant }) => {
       addVariant("enabled", "&:not([disabled], [aria-disabled='true'])");
       addVariant("active", ["&:active", "&[data-pressed='true']"]);
       addVariant("disabled", ["&[disabled]", "&[aria-disabled='true']"]);
+      addVariant("invalid", ["&[aria-invalid='true']"]);
     }),
   ],
 } satisfies Config;
