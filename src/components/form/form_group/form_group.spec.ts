@@ -1,7 +1,8 @@
-import { mount } from "@vue/test-utils";
-import FormGroup from "./form_group.vue";
-import FormInput from "../form_input";
 import { faker } from "@faker-js/faker";
+import { mount } from "@vue/test-utils";
+import FormCheckbox from "../form_checkbox";
+import FormInput from "../form_input";
+import FormGroup from "./form_group.vue";
 
 describe("FormGroup", () => {
   describe("with FormInput", () => {
@@ -286,5 +287,43 @@ describe("FormGroup", () => {
         expect(invalid.exists()).toBeFalsy();
       },
     );
+  });
+
+  describe("with FormCheckboxes", () => {
+    it("should render checkboxes", () => {
+      const wrapper = mount(FormGroup, {
+        slots: { default: [FormCheckbox, FormCheckbox] },
+      });
+
+      const checkboxes = wrapper.findAllComponents(FormCheckbox);
+
+      expect(checkboxes.length).toEqual(2);
+    });
+
+    it("should render a wrapper", () => {
+      const wrapper = mount(FormGroup, {
+        slots: { default: [FormCheckbox, FormCheckbox] },
+      });
+
+      const group = wrapper.find("[role='group']");
+
+      expect(group.exists()).toBeTruthy();
+      expect(group.element.tagName).toEqual("FIELDSET");
+    });
+
+    it("should render a label when 'label' prop is set", () => {
+      const text = faker.string.alpha(10);
+
+      const wrapper = mount(FormGroup, {
+        props: { label: text },
+        slots: { default: [FormCheckbox, FormCheckbox] },
+      });
+
+      const label = wrapper.find("[data-testid='label']");
+
+      expect(label.exists()).toBeTruthy();
+      expect(label.element.tagName).toEqual("LEGEND");
+      expect(label.text()).toEqual(text);
+    });
   });
 });

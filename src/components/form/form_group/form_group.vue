@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, provide, toRef, useSlots } from "vue";
-import { useId } from "../../../utils/useId";
+import { useId } from "../../../utils/use_id";
 import Typography from "../../typography";
 import FormInput from "../form_input";
 import { FORM_GROUP_SYMBOL, FormGroup } from "./constants";
@@ -39,8 +39,8 @@ const labelEl = computed<"label" | "legend">(() => (isInput.value ? "label" : "l
 const labelFor = computed<string | undefined>(() => (isInput.value ? inputId : undefined));
 
 provide<FormGroup>(FORM_GROUP_SYMBOL, {
-  inputId: isInput ? inputId : undefined,
-  descId: props.description ? descId : undefined,
+  inputId: labelFor,
+  descId: computed(() => (props.description ? descId : undefined)),
   optional: toRef(props, "optional"),
   invalid: toRef(props, "invalid"),
 });

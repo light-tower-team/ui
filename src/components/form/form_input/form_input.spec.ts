@@ -1,11 +1,11 @@
+import { faker } from "@faker-js/faker";
 import { ComponentMountingOptions, mount } from "@vue/test-utils";
+import { ref } from "vue";
+import { FORM_GROUP_SYMBOL } from "../form_group/constants";
+import { DEFAULT_FORM_INPUT_TYPE, FORM_INPUT_SIZES, FORM_INPUT_TYPES } from "./constants";
 import FormInput from "./form_input.vue";
 import { buildFormInputClasses } from "./utils/build_form_input_classes";
 import { buildFormInputWrapperClasses } from "./utils/build_form_input_wrapper_classes";
-import { DEFAULT_FORM_INPUT_TYPE, FORM_INPUT_SIZES, FORM_INPUT_TYPES } from "./constants";
-import { faker } from "@faker-js/faker";
-import { FORM_GROUP_SYMBOL } from "../form_group/constants";
-import { ref } from "vue";
 
 describe("FormInput", () => {
   const mountFormInput = (options?: ComponentMountingOptions<typeof FormInput>) => {

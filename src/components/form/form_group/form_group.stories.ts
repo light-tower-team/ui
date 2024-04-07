@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import FormGroup from "./form_group.vue";
+import FormCheckbox from "../form_checkbox";
 import FormInput from "../form_input";
+import FormGroup from "./form_group.vue";
 
 const meta: Meta<typeof FormGroup> = {
   title: "components/form/form_group",
@@ -101,6 +102,19 @@ export const Invalid: Story = {
         invalid-feedback="This field is required."
       >
         <FormInput  />
+      </FormGroup>
+    `,
+  }),
+};
+
+export const WithCheckboxes: Story = {
+  render: () => ({
+    components: { FormGroup, FormCheckbox },
+    template: `
+      <FormGroup label="Label Name">
+        <FormCheckbox>First</FormCheckbox>
+        <FormCheckbox>Second</FormCheckbox>
+        <FormCheckbox>Third</FormCheckbox>
       </FormGroup>
     `,
   }),

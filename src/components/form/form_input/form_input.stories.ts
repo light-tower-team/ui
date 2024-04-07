@@ -1,9 +1,9 @@
-import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
-import FormInput from "./form_input.vue";
-import { ICON_NAMES } from "../../icon";
+import { ref } from "vue";
 import Button from "../../button";
+import { ICON_NAMES } from "../../icon";
 import { DEFAULT_FORM_INPUT_SIZE, DEFAULT_FORM_INPUT_TYPE, FORM_INPUT_SIZES, FORM_INPUT_TYPES } from "./constants";
+import FormInput from "./form_input.vue";
 
 const meta: Meta<typeof FormInput> = {
   title: "components/form/form_input",
