@@ -1,8 +1,8 @@
-import { mount } from "@vue/test-utils";
-import FormCheckbox from "./form_checkbox.vue";
 import { faker } from "@faker-js/faker";
+import { mount } from "@vue/test-utils";
 import { useMockedConsole } from "../../../utils/__tests__/use_mocked_console";
 import { FORM_CHECKBOX_WARNINGS } from "./constants";
+import FormCheckbox from "./form_checkbox.vue";
 
 describe("FormCheckbox", () => {
   it("should have default structure", () => {
